@@ -51,12 +51,12 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-8 col-14 mx-auto">
-                    <div class="card px-4 flex gap-4 py-5">
-                        <div class="pb-2">
-                            <h5 class="card-title text-center text-success pb-0 fs-5 fw-bold">Connexion</h5>
+                    <div class="card px-2 flex gap-6 py-3">
+                        <div class=" d-flex flex-column align-items-center">
+                            <img src="assets/img/iconADN.png" width="120px" alt="" class="img-fluid">
+                            <h5 class="card-title text-success pt-2 fs-5 fw-bold">Connexion</h5>
                             <p class="text-center small"></p>
                         </div>
-    
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
     

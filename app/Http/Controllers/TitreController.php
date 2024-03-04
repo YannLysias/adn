@@ -63,7 +63,7 @@ class TitreController extends Controller
     {
         $titre = Titre::where('id', (int) $id)->first();
 
-        return view('edit-titre', compact('titre'));
+        return view('edit_titre', compact('titre'));
     }
 
     /**

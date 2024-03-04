@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/icon.png">
 
     <title>ADN-BENIN</title>
 
@@ -88,19 +89,21 @@
         </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Sexe<span class="required">*</span></label>
-            <select id="choix" value="{{$adherant->sexe}}" name="sexe">
+            <div class="col-md-6 col-sm-6">
+            <select id="choix" value="{{$adherant->sexe}}" name="sexe" class="form-control forms-control-lg">
                 <option value="">Choisir</option>
                 <option value="Masculin" @selected($adherant->sexe == 'Masculin' ? true : false)>M</option>
                 <option value="Feminin" @selected($adherant->sexe == 'Feminin' ? true : false)>F</option>
             </select>
+            </div>
             @error('sexe')
             <div class="d-block text-danger">{{$message}}</div>
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Email</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->email}}" name="email" class='email' required="required" type="email" />
+                <input class="form-control" value="{{$adherant->email}}" name="email" class='email' type="email" />
             </div>
             @error('email')
             <div class="d-block text-danger">{{$message}}</div>
@@ -126,26 +129,33 @@
         </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align" required>Statut<span class="required">*</span></label>
-            <select id="choix" value="{{$adherant->statut}}" name="statut">
+            <div class="col-md-6 col-sm-6">
+            <select id="choix" value="{{$adherant->statut}}" name="statut" class="form-control forms-control-lg">
                 <option value="">Choisir</option>
                 <option value="En Chômage" @selected($adherant->statut == 'En Chômage' ? true : false)>En Chômage</option>
                 <option value="En Activiter" @selected($adherant->statut == 'En Activiter' ? true : false)>En Activiter</option>
-                
             </select>
+        </div>
             @error('statut')
             <div class="d-block text-danger">{{$message}}</div>
             @enderror
         </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">type<span class="required">*</span></label>
-            <select id="choix" value="{{$adherant->type}}" name="type">
-                <option value="">Choisir</option>
+            <div class="col-md-6 col-sm-6">
+            <select id="choix" value="{{$adherant->type}}" name="type" class="form-control forms-control-lg">
+                @if(Auth::user()->type === 'Administrateur')
+                <option value="Coordonnateur" @selected($adherant->type == 'Coordonnateur' ? true : false)>Coordonnateur</option>
+                @elseif (Auth::user()->type === 'Coordonnateur')
                 <option value="Adhérent" @selected($adherant->type == 'Adhérent' ? true : false)>Adhérent</option>
+                @endif
             </select>
+            </div>
             @error('type')
             <div class="d-block text-danger">{{$message}}</div>
             @enderror
         </div>
+
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
             <div class="col-md-6 col-sm-6">
@@ -182,6 +192,7 @@
 
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Titres<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
             <select id="choix" name="titre_id" value="{{$adherant->titre_id}}" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisissez un Titre</option>
                 @foreach ($titres as $titre)
@@ -192,9 +203,11 @@
                 @enderror
             </select>
         </div>
+        </div>
 
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3 label-align">Departement<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
             <select id="departement_id" value="{{$adherant->departement_id}}" name="departement_id" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisissez un departement
                 </option>
@@ -207,8 +220,10 @@
                 @enderror
             </select>
         </div>
+        </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Commune<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
             <select id="commune_id" value="{{$adherant->commune_id}}"  name="commune_id" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisissez une commune
                 </option>
@@ -220,8 +235,10 @@
                 @enderror
             </select>
         </div>
+        </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Arrondissement<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
             <select id="arrondissement_id" value="{{$adherant->arrondissement_id}}" name="arrondissement_id" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisissez un Arrondissement
                 </option>
@@ -234,8 +251,10 @@
                 @enderror
             </select>
         </div>
+        </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Quartier<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
             <select id="quartier_id" value="{{$adherant->quartier_id}}" name="quartier_id" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisissez un Quartier
                 </option>
@@ -248,11 +267,14 @@
                 @enderror
             </select>
         </div>
+        </div>
 
 
     <div class="field item form-group">
-    <label class="col-form-label col-md-3 col-sm-3  label-align">Photo<span class="required">*</span></label>
-    <input type="file" value="{{$adherant->photo}}" id="photo" name="photo" accept="image/*">
+    <label class="col-form-label col-md-3 col-sm-3  label-align">Photo</label>
+    <div class="col-md-6 col-sm-6">
+    <input type="file" value="{{$adherant->photo}}" id="photo" name="photo" accept="image/*" class="form-control forms-control-lg">
+</div>
     @error('photo')
     <div class="d-block text-danger">{{$message}}</div>
     @enderror
@@ -408,18 +430,18 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="/../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="/../vendors/nprogress/nprogress.js"></script>
     <!-- validator -->
     <!-- <script src="../vendors/validator/validator.js"></script> -->
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="/../build/js/custom.min.js"></script>
 
 </body>
 

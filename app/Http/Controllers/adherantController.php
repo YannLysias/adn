@@ -161,14 +161,14 @@ class adherantController extends Controller
             'sexe' => 'required|max:255',
             'telephone' => 'required|max:255',
             'type' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
+            //'email' => 'required|email|unique:users,email',
             'password' => 'nullable|min:8',
-            'ravip' => 'required|max:255',
+            //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
             'statut' =>    'required|max:255',
-            'npi' => 'required|max:255',
-            'photo' => 'required|mimes:jpg,png,jpeg',
-            'titre_id' => 'required|max:255',
+            //'npi' => 'required|max:255',
+            //'photo' => 'required|mimes:jpg,png,jpeg',
+            //'titre_id' => 'required|max:255',
             'quartier_id' => 'required|max:255',
             'arrondissement_id' => 'required|max:255',
             'departement_id' => 'required|max:255',
@@ -177,14 +177,20 @@ class adherantController extends Controller
 
         ]);
 
-
-        $path_photo = Storage::putFile('public/photos', $request->photo);
-        $path_photo_convert_to_table = explode('/', $path_photo);
-
-        if ($request->has('photo')) {
-            $path_photo = Storage::putFile('public/photos', $request->photo);
+        if ($request->hasFile('photo')) {
+            // Valider et stocker la photo
+            $path_photo = $request->file('photo')->store('public/photos');
             $path_photo_convert_to_table = explode('/', $path_photo);
+        } else {
+            // Aucun fichier photo n'a été soumis dans la requête, vous pouvez choisir de ne rien faire ou d'effectuer d'autres actions selon vos besoins
         }
+        // $path_photo = Storage::putFile('public/photos', $request->photo);
+        // $path_photo_convert_to_table = explode('/', $path_photo);
+
+        // if ($request->has('photo')) {
+        //     $path_photo = Storage::putFile('public/photos', $request->photo);
+        //     $path_photo_convert_to_table = explode('/', $path_photo);
+        // }
 
         $titre = Titre::findOrFail(intval($request->titre_id));
 
@@ -275,35 +281,39 @@ class adherantController extends Controller
             'sexe' => 'required|max:255',
             'telephone' => 'required|max:255',
             'type' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|max:255',
-            'ravip' => 'required|max:255',
+            //'email' => 'required|email|unique:users,email',
+            'password' => 'nullable|min:8',
+            //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
             'statut' =>    'required|max:255',
-            'npi' => 'required|max:255',
-            'photo' => 'required|mimes:jpg,png,jpeg',
-            'titre_id' => 'required|max:255',
+            //'npi' => 'required|max:255',
+            //'photo' => 'required|mimes:jpg,png,jpeg',
+            //'titre_id' => 'required|max:255',
             'quartier_id' => 'required|max:255',
             'arrondissement_id' => 'required|max:255',
             'departement_id' => 'required|max:255',
             'commune_id' => 'required|max:255',
 
         ]);
+        
         $adherant = User::where('id', (int) $id)->first();
 
         $titre = Titre::findOrFail(intval($request->titre_id));
-
+        
         $departement = Departement::findOrFail(intval($request->departement_id));
         $commune = Commune::findOrFail(intval($request->commune_id));
         $arrondissement = Arrondissement::findOrFail(intval($request->arrondissement_id));
         $quartier = Quartier::findOrFail(intval($request->quartier_id));
-
+        
         $adherant->nom = $request->nom;
         $adherant->prenom = $request->prenom;
+        
         $adherant->sexe = $request->sexe;
         $adherant->telephone = $request->telephone;
         $adherant->type = $request->type;
+       
         $adherant->email = $request->email;
+        
         $adherant->password = $request->password;
         $adherant->ravip = $request->ravip;
         $adherant->profession = $request->profession;
@@ -315,10 +325,11 @@ class adherantController extends Controller
         $adherant->departement_id = $departement->id;
         $adherant->arrondissement_id = $arrondissement->id;
         $adherant->commune_id = $commune->id;
-
+        
         $adherant->save();
 
         return redirect()->route('adherant.index')->with('success', 'Modifier avec success');
+        dd('kpowds');
     }
 
     /**

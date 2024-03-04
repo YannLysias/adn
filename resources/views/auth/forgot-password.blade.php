@@ -51,6 +51,11 @@
 
 
               <div class="card mb-3">
+                <div class=" d-flex flex-column align-items-center">
+                  <img src="assets/img/iconADN.png" width="120px" alt="" class="img-fluid">
+                  <h5 class="card-title text-success pt-2 fs-5 fw-bold">Connexion</h5>
+                  <p class="text-center small"></p>
+              </div>
 
                 <div class="card-body">
 

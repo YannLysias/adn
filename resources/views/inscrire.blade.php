@@ -7,20 +7,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/icon.png">
 
     <title>ADN-BENIN</title>
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="/../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="/../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="/../build/css/custom.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
@@ -52,13 +53,14 @@
 
     <div class="container body">
         <div class="main_container" >
-            <!-- Sidebar -->
-            <!-- Top Navigation -->
-            <!-- Page Content -->
-            <div  role="main" class="" >
-                <div class=" page-title" style="background-color: #0b5e1e; color: #fff;">
-                    <div class="title_left" style="text-align: center; padding-left: 580px;">
-                        <h3 >S'inscrire</h3>
+            <div role="main">
+                <div class="page-title text-white p-3 mb-4" style="background-color: #0b5e1e;">
+                    <div class="container" >
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center">
+                                <h3>S'inscrire</h3>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <div class="clearfix"></div>
@@ -92,21 +94,7 @@
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Sexe<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <select id="choix" value="{{ old('sexe') }}" required="required"
-                                            class="form-control forms-control-lg" name="sexe">
-                                            <option value="">Choisir</option>
-                                            <option value="Masculin">M</option>
-                                            <option value="Feminin">F</option>
-                                        </select>
-                                    </div>
-                                    @error('sexe')
-                                    <div class="d-block text-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
+                               
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span
                                             class=""></span></label>
@@ -148,7 +136,7 @@
                                     <div class="col-md-6 col-sm-6">
                                         <select id="choix" value="{{ old('statut') }}" required="required"
                                             class="form-control forms-control-lg" name="statut" required>
-                                            <option value=" ">Choisir</option>
+                                            <option value="" disabled selected>Choisir</option>
                                             <option value="En Chômage">En Chômage</option>
                                             <option value="En Activiter">En Activiter</option>
                                         </select>
@@ -420,18 +408,18 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="/../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="/../vendors/nprogress/nprogress.js"></script>
     <!-- validator -->
     <!-- <script src="../vendors/validator/validator.js"></script> -->
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="/../build/js/custom.min.js"></script>
 
 </body>
 

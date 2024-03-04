@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/img/icon.png">
 
   <title>ADN-BENIN </title>
 
@@ -79,7 +80,7 @@
                     <div class="tile-stats">
                       <div class="icon"><i class="fa fa-user"></i></div>
                       <div class="count">{{$totalUser}}</div>
-                      <h4>Total{{$totalUser > 1 ? 's' : ''}}</h4>
+                      <h4>Total{{$totalUser > 1 ? 's' : ''}} d'enregistrement{{$totalUser > 1 ? 's' : ''}}</h4>
                     </div>
                   </div>
                 </div>
@@ -96,7 +97,7 @@
                       <div class="card-body">
                         <h5 class="card-title">{{ $departement->libelle }}</h5>
                         <p class="card-text">
-                          <span class="font-bold">{{ $departement->nombre_adherents }}</span> Adhérent{{$departement->nombre_adherents > 1 ? 's' : ''}}
+                          <span class="font-bold">{{ $departement->nombre_adherents }}</span> Adhérent{{$departement->nombre_adherents > 1 ? 's' : ''}} 
                         </p>
                       </div>
                     </div>
@@ -121,7 +122,7 @@
             &copy; 2024 Action pour le Développement National <strong></strong>
           
         </div>
-        </div>
+       
         <div class="clearfix"></div>
       </footer>
       <!-- /footer content -->

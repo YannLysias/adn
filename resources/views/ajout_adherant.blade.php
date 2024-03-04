@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="assets/img/icon.png">
 
     <title>ADN-BENIN </title>
 
@@ -78,7 +79,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Prenom<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" class='optional' name="prenom" data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}"/>
+                <input class="form-control" class='optional' placeholder="La première lettre en majuscule" name="prenom" data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}"/>
             </div>
             @error('prenom')
             <div class="d-block text-danger">{{$message}}</div>
@@ -88,7 +89,7 @@
             <label class="col-form-label col-md-3 col-sm-3  label-align">Sexe<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="choix"  value="{{ old('sexe') }}" class="form-control forms-control-lg" name="sexe" >
-                <option value="">Choisir</option>
+                <option value="" disabled selected>Choisir</option>
                 <option value="Masculin">M</option>
                 <option value="Feminin">F</option>
             </select>
@@ -98,9 +99,9 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Email</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" name="email" class='email' required="required" type="email"  value="{{ old('email') }}"/>
+                <input class="form-control" name="email" class='email' placeholder="Saisissez votre Email"  type="email"  value="{{ old('email') }}"/>
             </div>
             @error('email')
             <div class="d-block text-danger">{{$message}}</div>
@@ -109,7 +110,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="tel" class='tel' name="telephone" required='required' data-validate-length-range="8,20"  value="{{ old('telephone') }}"/>
+                <input class="form-control" type="tel" class='tel' placeholder="Saisissez votre Numéro" name="telephone" required='required' data-validate-length-range="8,20"  value="{{ old('telephone') }}"/>
             </div>
             @error('telephone')
             <div class="d-block text-danger">{{$message}}</div>
@@ -118,7 +119,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Profession<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" class='optional' name="profession" data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}" />
+                <input class="form-control" class='optional' name="profession" placeholder="Saisissez votre Profession" data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}" />
             </div>
             @error('profession')
             <div class="d-block text-danger">{{$message}}</div>
@@ -128,9 +129,9 @@
             <label class="col-form-label col-md-3 col-sm-3  label-align">Statut<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="choix"  value="{{ old('statut') }}" class="form-control forms-control-lg" name="statut" required>
-                <option value="#">Choisir</option>
+                <option value="" disabled selected>Choisir</option>
                 <option value="En Chômage">En Chômage</option>
-                <option value="En Activiter">En Activiter</option>
+                <option value="En Activiter">En Activité</option>
             </select>
         </div>
             @error('statut')
@@ -141,7 +142,7 @@
             <label class="col-form-label col-md-3 col-sm-3  label-align">type<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="choix"  value="{{ old('type') }}" class="form-control forms-control-lg" name="type" required>
-                <option value="">Choisir</option>
+                <option value="" disabled selected>Choisir</option>
                 @if(Auth::user()->type === 'Administrateur')
                     <option value="Coordonnateur">Coordonnateur</option>
                 @elseif (Auth::user()->type === 'Coordonnateur')
@@ -156,7 +157,8 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="number" class='tel' name="npi" data-validate-length-range="8,20" value="{{ old('npi') }}"/>
+                <input class="form-control" type="number" class='tel'
+                    name="npi" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro NPI" value="{{ old('npi') }}" />
             </div>
             @error('npi')
             <div class="d-block text-danger">{{$message}}</div>
@@ -165,7 +167,8 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">RAVIP</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" type="number" class='tel' name="ravip" data-validate-length-range="8,20" value="{{ old('ravip') }}"/>
+                <input class="form-control" type="number" class='tel'
+                    name="ravip" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro RAVIP" value="{{ old('ravip') }}" />
             </div>
             @error('ravip')
             <div class="d-block text-danger">{{$message}}</div>
@@ -188,7 +191,7 @@
         </div> --}}
 
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Titres<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Titres</label>
             <div class="col-md-6 col-sm-6">
             <select id="choix" value="{{ old('titre_id') }}" name="titre_id" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisissez un Titre</option>
@@ -465,18 +468,18 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="/../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="/../vendors/nprogress/nprogress.js"></script>
     <!-- validator -->
     <!-- <script src="../vendors/validator/validator.js"></script> -->
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="/../build/js/custom.min.js"></script>
 
 </body>
 

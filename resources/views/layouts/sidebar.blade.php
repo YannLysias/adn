@@ -1,8 +1,11 @@
 @if ( Auth::user()->type == "Administrateur" || Auth::user()->type == "Coordonnateur")
 
 <div class="navbar nav_title" style="border: 0;">
-  <a href="/dashboard" class="site_title"><i class="fa fa-paw"></i> <span>ADN</span></a>
-</div><br><br><br>
+  <a href="/dashboard" class="site_title d-flex align-items-center">
+      <img src="assets/img/icone.png" alt="Logo ADN" class="logo mr-2">
+      <span>ADN</span>
+  </a>
+</div> <br><br>
 
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
   <div class="menu_section">
@@ -35,6 +38,7 @@
 
             <li><a href="/adherant"><i class="fa fa-user"></i> Adhérants</a>
             <li><a href="/titre"><i class="fa fa-table"></i> Titres </a>
+              
               {{--
             <li><a href="/commentaire"><i class="fa fa-table"></i> Commentaire </a> --}}
 
@@ -146,4 +150,10 @@
     color: #888;
     /* Couleur du texte */
   }
+  .logo {
+    width: 30px; /* Ajustez la taille selon vos besoins */
+    height: 30px; /* Ajustez la taille selon vos besoins */
+    border-radius: 50%; /* Pour rendre le logo en forme de cercle */
+    object-fit: cover; /* Pour s'assurer que l'image du logo est toujours entièrement contenue dans le cercle */
+}
 </style>
