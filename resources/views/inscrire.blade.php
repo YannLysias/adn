@@ -299,8 +299,8 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="../vendors/validator/multifield.js"></script>
-    <script src="../vendors/validator/validator.js"></script>
+    <script src="/vendors/validator/multifield.js"></script>
+    <script src="/vendors/validator/validator.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -408,18 +408,18 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- jQuery -->
-    <script src="/../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="/../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
-    <script src="/../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="/../vendors/nprogress/nprogress.js"></script>
+    <script src="/vendors/nprogress/nprogress.js"></script>
     <!-- validator -->
-    <!-- <script src="../vendors/validator/validator.js"></script> -->
+    <!-- <script src="/vendors/validator/validator.js"></script> -->
 
     <!-- Custom Theme Scripts -->
-    <script src="/../build/js/custom.min.js"></script>
+    <script src="/build/js/custom.min.js"></script>
 
 </body>
 

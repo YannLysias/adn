@@ -177,6 +177,12 @@ class adherantController extends Controller
 
         ]);
 
+        // $users = User::where('email',  $request->email)
+        // ->orWhere('statut', true)->get();
+        // if(count($users) > 0){
+        //     return back()->withErrors(['role' => " Ce mail " . $request->email . "existe déjà"]);
+        // }
+
         if ($request->hasFile('photo')) {
             // Valider et stocker la photo
             $path_photo = $request->file('photo')->store('public/photos');
