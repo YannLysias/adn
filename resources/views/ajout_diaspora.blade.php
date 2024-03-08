@@ -19,7 +19,7 @@
     <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -57,7 +57,7 @@
                     <div class="container" >
                         <div class="row justify-content-center">
                             <div class="col-md-6 text-center">
-                                <h3>S'inscrire</h3>
+                                <h3>S'inscrire (Diaspora)</h3>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_content">
-                            <form class="" action="/inscrire" method="post"
+                            <form class="" action="/diaspora" method="post"
                                 enctype="multipart/form-data" novalidate onsubmit="return confirmSubmit();">
                                 @csrf
 
@@ -89,7 +89,7 @@
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" class='optional' name="prenom" required="required"
-                                            data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}" />
+                                             type="text" value="{{ old('prenom') }}" />
                                     </div>
                                     @error('prenom')
                                     <div class="d-block text-danger">{{$message}}</div>
@@ -143,162 +143,19 @@
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
-                                <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Statut<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <select id="choix" value="{{ old('statut') }}" required="required"
-                                            class="form-control forms-control-lg" name="statut" required>
-                                            <option value="" disabled selected>Choisir</option>
-                                            <option value="Diaspora">Diaspora</option>
-                                            <option value="En Chômage">Au Chômage</option>
-                                            <option value="En Activiter">En Activité</option>
-                                        </select>
-                                    </div>
-                                    @error('statut')
-                                    <div class="d-block text-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
 
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">PAYS<span
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Ville/pays<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" id="ville" placeholder="Entrez une ville" class='optional' name="pays" 
+                                        <input class="form-control" id="ville" placeholder="Saississez votre Ville (Pays)" class='optional' name="pays" 
                                             type="text" value="{{ old('pays') }}" />
                                             <div id="suggestions" class="suggestions-container"></div>
                                         </div>
                                     @error('pays')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
-                                </div>
-                    
-                                {{-- <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">type<span
-                                            class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <select id="choix" value="{{ old('type') }}" required="required"
-                                            class="form-control forms-control-lg" name="type" required>
-                                            <option value="">Choisir</option>
-                                            <option value="Aucun">Aucun</option>
-                                        </select>
-                                    </div>
-                                    @error('type')
-                                    <div class="d-block text-danger">{{$message}}</div>
-                                    @enderror
-                                </div> --}}
-
-
-                                {{-- champ masqué  --}}
-                                <div id="pays" style="display: grid" class="field item form-group">
-
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input class="form-control" type="number" class='tel'
-                                                name="npi" data-validate-length-range="9,20" value="{{ old('npi') }}" />
-                                        </div>
-                                        @error('npi')
-                                        <div class="d-block text-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">RAVIP</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input class="form-control" type="number" class='tel'
-                                                name="ravip" data-validate-length-range="9,20" value="{{ old('ravip') }}" />
-                                        </div>
-                                        @error('ravip')
-                                        <div class="d-block text-danger">{{$message}}</div>
-                                        @enderror
-                                    </div>
-    
-                                    <div class="field item form-group">
-    
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Departement<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="departement_id" value="{{ old('departement_id') }}"
-                                                 name="departement_id"
-                                                class="form-control forms-control-lg" >
-                                                <option value="" disabled selected>Choisissez un departement
-                                                </option>
-                                                @foreach ($departements as $departement)
-                                                <option value="{{$departement->id}}">{{$departement->libelle}}
-                                                </option>
-                                                @endforeach
-                                                @error('departement_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">Commune<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="commune_id" value="{{ old('commune_id') }}" name="commune_id"
-                                                 class="form-control forms-control-lg">
-                                                <option value="" disabled selected>Choisissez une commune
-                                                </option>
-                                                {{-- @foreach ($communes as $commune)
-                                                <option value="{{$commune ->id}}">{{$commune->libelle}}</option>
-                                                @endforeach
-                                                @error('commune_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">Arrondissement<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="arrondissement_id" value="{{ old('arrondissement_id') }}"
-                                                name="arrondissement_id" class="form-control forms-control-lg">
-                                                <option value="" disabled selected>Choisissez un Arrondissement
-                                                </option>
-                                                {{-- @foreach ($arrondissements as $arrondissement)
-                                                <option value="{{$arrondissement ->id}}">
-                                                    {{$arrondissement->libelle}}</option>
-                                                @endforeach
-                                                @error('arrondissement_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">Quartier<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="quartier_id" value="{{ old('quartier_id') }}" name="quartier_id"
-                                                class="form-control forms-control-lg">
-                                                <option value="" disabled selected>Choisissez un Quartier
-                                                </option>
-                                                {{-- @foreach ($quartiers as $quartier)
-                                                <option value="{{$quartier ->id}}">{{$quartier->libelle}}
-                                                </option>
-                                                @endforeach
-                                                @error('quartier_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- champ masqué  --}}
-
-
-                                {{-- <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Photo<span
-                                            class=""></span></label>
-                                    <input type="file" id="photo" value="{{ old('photo') }}" name="photo"
-                                        accept="image/*">
-                                    @error('photo')
-                                    <div class="d-block text-danger">{{$message}}</div>
-                                    @enderror
-                                </div> --}}
+                                </div>                                
 
                                 <div class="ln_solid">
                                     <div class="form-group">
@@ -307,11 +164,8 @@
                                             <button type='reset' class="btn btn-danger">Annuler</button>
                                         </div>
                                     </div>
-
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
                 </div>
@@ -341,6 +195,54 @@
 
 
 
+    <script>  
+    //  $('#choix').change(function() {
+    //     let input = this.value;
+    //       if (input == 'Diaspora') {
+    //         $("#pays").addClass('invisible')
+    //         $("#pays").removeClass('visible')
+    //       }else{
+    //         $("#pays").addClass('visible')
+    //         $("#pays").removeClass('invisible')
+    //       }
+
+    //     })
+
+            // Fonction exécutée lorsque le bouton est cliqué
+            $('#diasporaButton').click(function() {
+                // Masquer la div #pays
+                $('#pays').hide();
+            });
+        document.getElementById('ville').addEventListener('input', function() {
+         
+            var input = this.value;
+            var username = 'yannlysias'; // Remplacez YOUR_GEONAMES_USERNAME par votre nom d'utilisateur Geonames
+            var url = 'http://api.geonames.org/searchJSON?q=' + input + '&maxRows=10&username=' + username;
+
+            // Envoi de la requête à l'API Geonames
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Traiter les données retournées par l'API et afficher les suggestions à l'utilisateur
+                    // Par exemple, vous pouvez créer une liste déroulante avec les suggestions de villes
+                    var suggestionsContainer = document.getElementById('suggestions');
+                    suggestionsContainer.innerHTML = ''; // Effacer les anciennes suggestions
+
+                    // Parcourir les résultats de la recherche et afficher les suggestions
+                    data.geonames.forEach(function(ville) {
+                        var suggestion = document.createElement('div');
+                        suggestion.textContent = ville.name + ' (' + ville.countryName + ')'; // Ajouter le nom du pays
+                        suggestion.addEventListener('click', function() {
+                            document.getElementById('ville').value = ville.name + ' (' + ville.countryName + ')';
+                            suggestionsContainer.innerHTML = ''; // Effacer la liste déroulante après la sélection
+                        });
+
+                        suggestionsContainer.appendChild(suggestion);
+                    });
+                })
+                .catch(error => console.error('Erreur lors de la récupération des suggestions de villes depuis Geonames :', error));
+        });
+    </script>
 
 
 

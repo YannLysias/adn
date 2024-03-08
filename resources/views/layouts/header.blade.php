@@ -16,13 +16,14 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'contact' ? ' active' : ''  }} px-0"
                         href="/contact-us">CONTACT</a>
                 </li>
-                <li class="nav-item me-lg-5">
-                    <a class="nav-link {{ Route::currentRouteName() == 'inscrire.index' ? ' active' : ''  }} px-0" href="/inscrire/create">S'INSCRIRE</a>
-                </li>
-
-                <!--<li><a href="#">SE CONNECTER</a></li> -->
-
+                <li class="dropdown"><a href="#"><span>S'INSCRIRE</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                      <li class="nav-item me-lg-5"><a href="/inscrire/create">Local (Benin)</a></li>
+                      <li class="nav-item me-lg-5"><a href="/diaspora/create">Extérieur du pays</a></li>
+                    </ul>
+                  </li>
             </ul>
+            
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 

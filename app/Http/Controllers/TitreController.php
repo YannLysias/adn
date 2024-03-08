@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Titre;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TitreController extends Controller
@@ -33,19 +34,19 @@ class TitreController extends Controller
     {
         $validateData = $request->validate([
             'libelle' => 'required|max:255',
-           
-
+            //'user_id' => 'required|max:255',
         ]);
-        
-
-
-        Titre::create([
+    
+        // Créer un nouveau titre
+        $titre = Titre::create([
             'libelle' => $request->libelle,
-            
-        
+            //'user_id' => $request->user_id,
         ]);
-
-        return redirect("/titre");
+    
+        
+        $users = User::where('titre_id', $titre->id)->get();
+    
+        return view('liste_utilisateurs_par_titre', ['users' => $users]);
     }
 
     /**
@@ -53,7 +54,10 @@ class TitreController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $titre = Titre::findOrFail($id);
+        $adherents = $titre->users;
+    
+        return view('titre_user', compact('titre', 'adherents'));
     }
 
     /**
@@ -73,11 +77,13 @@ class TitreController extends Controller
     {
         $request->validate([
             'libelle' => 'required|max:255',
+            //'user_id' => 'required|max:255',
            
         ]);
         $titres = Titre::where('id', (int) $id)->first();
 
         $titres ->libelle = $request->libelle;
+       // $titres ->user_id = $request->user_id;
 
         $titres -> save();
 

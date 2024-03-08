@@ -20,7 +20,7 @@
     <!-- bootstrap-daterangepicker -->
     <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
 </head>
@@ -130,7 +130,7 @@
             <div class="col-md-6 col-sm-6">
             <select id="choix"  value="{{ old('statut') }}" class="form-control forms-control-lg" name="statut" required>
                 <option value="" disabled selected>Choisir</option>
-                <option value="En Chômage">En Chômage</option>
+                <option value="Au Chômage">Au Chômage</option>
                 <option value="En Activiter">En Activité</option>
             </select>
         </div>
@@ -267,6 +267,9 @@
                 <div class="d-block text-danger">{{$message}}</div>
                 @enderror --}}
             </select>
+                 @error('quartier_id')
+                <div class="d-block text-danger">{{$message}}</div>
+                @enderror 
         </div>
         </div>
 

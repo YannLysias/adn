@@ -6,6 +6,16 @@
 * License: https://bootstrapmade.com/license/
 */
 
+/* ou display: inline-block; en fonction de votre mise en page */
+
+.visible {
+  display: block; 
+}
+
+.invisible {
+  display: none;
+}
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/

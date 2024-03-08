@@ -48,11 +48,6 @@
             <!-- sidebar menu -->
             @include('layouts.sidebar')
 
-        <!-- top navigation -->
-        
-        <!-- /top navigation -->
-
-        <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
                 <div class="page-title">
@@ -67,14 +62,9 @@
                     <div class="col-xl-4">
                       <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                          @if($user->photo)
-                          <img src="/storage/photos/{{ $user->photo }}" style="width: 80px; height: 80px;" alt="Profile" class="rounded-circle profile-picture">
-                            @else
-                          <!-- Afficher une image par défaut ou un avatar -->
-                          <img src="/storage/photos/images.png" style="width: 80px; height: 80px;" alt="Default Avatar" class="rounded-circle profile-picture">
-                            @endif
-                          <h2>{{ $user->nom }} {{ $user->prenom }}</h2>
-                          <h3>{{ $user->type }}</h3>
+                          <img src="/storage/photos/{{Auth::user()->photo}}" style="width: 80px; height: 80px;" alt="Profile" class="rounded-circle profile-picture">
+                          <h2>{{ $diaspora->nom }} {{ $diaspora->prenom }}</h2>
+                          <h3>{{ $diaspora->type }}</h3>
                         </div>
                       </div>
                     </div>
@@ -92,82 +82,44 @@
             
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">Nom et Prénom</div>
-                                <div class="col-lg-9 col-md-8">{{ $user->nom }} {{ $user->prenom }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->nom }} {{ $diaspora->prenom }}</div>
                               </div>
             
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Role</div>
-                                <div class="col-lg-9 col-md-8">{{ $user->type }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->type }}</div>
                               </div>
             
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Sexe</div>
-                                <div class="col-lg-9 col-md-8">{{ $user->sexe }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->sexe }}</div>
                               </div>
             
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Email</div>
-                                <div class="col-lg-9 col-md-8">{{ $user->email }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->email }}</div>
                               </div>
 
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Téléphone</div>
-                                <div class="col-lg-9 col-md-8">{{ $user->telephone }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->telephone }}</div>
                               </div>
             
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Profession</div>
-                                <div class="col-lg-9 col-md-8">{{ $user->profession }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->profession }}</div>
                               </div>
                               
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Statut</div>
-                                <div class="col-lg-9 col-md-8">{{ $user->statut }}</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->statut }}</div>
                               </div>
+
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Titre</div>
-                                @if($user->titre)
-                                <div class="col-lg-9 col-md-8">{{ $user->titre->libelle }}</div>
-                                @else
-                                Aucun titre défini
-                              @endif
+                                <div class="col-lg-3 col-md-4 label">Pays</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->pays }}</div>
                               </div>
-                              
-                              <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Departement</div>
-                                @if($user->quartier && $user->quartier->arrondissement && $user->quartier->arrondissement->commune && $user->quartier->arrondissement->commune->departement)
-                                    <div class="col-lg-9 col-md-8">{{ $user->quartier->arrondissement->commune->departement->libelle }}</div>
-                                @else
-                                    <div class="col-lg-9 col-md-8">Aucun Département défini</div>
-                                @endif
-                            </div>
-
-                            <div class="row">
-                              <div class="col-lg-3 col-md-4 label">Commune</div>
-                              @if($user->quartier && $user->quartier->arrondissement && $user->quartier->arrondissement->commune)
-                                  <div class="col-lg-9 col-md-8">{{ $user->quartier->arrondissement->commune->libelle }}</div>
-                              @else
-                                  <div class="col-lg-9 col-md-8">Aucune Commune définie</div>
-                              @endif
-                          </div>
-
-                          <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Arrondissement</div>
-                            @if($user->quartier && $user->quartier->arrondissement)
-                                <div class="col-lg-9 col-md-8">{{ $user->quartier->arrondissement->libelle }}</div>
-                            @else
-                                <div class="col-lg-9 col-md-8">Aucun Arrondissement défini</div>
-                            @endif
-                        </div>
-
-                        <div class="row">
-                          <div class="col-lg-3 col-md-4 label">Quartier</div>
-                          @if($user->quartier)
-                              <div class="col-lg-9 col-md-8">{{ $user->quartier->libelle }}</div>
-                          @else
-                              <div class="col-lg-9 col-md-8">Aucun Quartier défini</div>
-                          @endif
-                      </div>
+                              {{-- @if ( Auth::user()->type == "Administrateur" ) --}}
                               
                             </div>
             

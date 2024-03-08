@@ -20,6 +20,7 @@ class AutreController extends Controller
         $totalUser = User::all()->count();
         $totalAdherants = User::where('type', 'Adhérent')->count();
         $totalCoordonnateur = User::where('type', 'Coordonnateur')->count();
+        $totalDiaspora = User::where('statut', 'Diaspora')->count();
 
         // Parcourir chaque département et compter le nombre d'adhérents associés
         foreach ($departements as $departement) {
@@ -30,7 +31,7 @@ class AutreController extends Controller
         }
 
         // Passer les données à la vue
-        return view('welcome', compact('departements', 'totalAdherants', 'totalCoordonnateur', 'totalUser'));
+        return view('welcome', compact('departements', 'totalAdherants', 'totalDiaspora', 'totalCoordonnateur', 'totalUser'));
     }
 
     public function contactIndex()
@@ -51,6 +52,7 @@ class AutreController extends Controller
         $totalUser = User::all()->count();
         $totalAdherants = User::where('type', 'Adhérent')->count();
         $totalCoordonnateur = User::where('type', 'Coordonnateur')->count();
+        $totalDiaspora = User::where('statut', 'Diaspora')->count();
 
         // Parcourir chaque département et compter le nombre d'adhérents associés
         foreach ($departements as $departement) {
@@ -60,6 +62,6 @@ class AutreController extends Controller
             $departement['nombre_adherents'] = $nombre_adherents;
         }
         // Passer les données à la vue
-        return view('dashboard', compact('departements', 'totalAdherants', 'totalCoordonnateur', 'totalUser'));
+        return view('dashboard', compact('departements', 'totalAdherants', 'totalDiaspora', 'totalCoordonnateur', 'totalUser'));
     }
 }

@@ -19,7 +19,7 @@
   <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- bootstrap-daterangepicker -->
   <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <!-- Custom Theme Style -->
   <link href="/build/css/custom.min.css" rel="stylesheet">
 </head>
@@ -58,9 +58,20 @@
                 <div class="col-lg-3 col-md-3 col-sm-6">
                   <div class="animated flipInY">
                     <div class="tile-stats">
-                      <div class="icon"><i class="fa fa-user"></i></div>
+                      <div class="icon"><i class="fa fa-users"></i></div>
                       <div class="count">{{$totalAdherants}}</div>
                       <h4>Adhérent{{$totalAdherants > 1 ? 's' : ''}} </h4>
+                      <p></p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                  <div class="animated flipInY">
+                    <div class="tile-stats">
+                      <div class="icon"><i class="fa fa-globe"></i></div>
+                      <div class="count">{{$totalDiaspora}}</div>
+                      <h4>Diaspora{{$totalDiaspora > 1 ? 's' : ''}}</h4>
                       <p></p>
                     </div>
                   </div>
@@ -78,7 +89,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6">
                   <div class="animated flipInY">
                     <div class="tile-stats">
-                      <div class="icon"><i class="fa fa-user"></i></div>
+                      <div class="icon"><i class="fa fa-file"></i></div>
                       <div class="count">{{$totalUser}}</div>
                       <h4>Total{{$totalUser > 1 ? 's' : ''}} d'enregistrement{{$totalUser > 1 ? 's' : ''}}</h4>
                     </div>

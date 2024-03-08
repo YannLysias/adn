@@ -9,10 +9,28 @@ use App\Models\Titre;
 use App\Models\Quartier;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class InscrireController extends Controller
 {
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $username = 'yannlysias'; 
+
+        $response = Http::get("http://api.geonames.org/searchJSON?q=$query&featureCode=PCLI&maxRows=10&username=$username");
+
+        if ($response->ok()) {
+            $data = $response->json();
+            return response()->json($data['geonames']);
+        } else {
+            return response()->json(['error' => 'Failed to fetch data from Geoname API'], $response->status());
+        }
+
+    }
+
 
     public function filter(Request $request)
     {
@@ -37,6 +55,9 @@ class InscrireController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+
+
     public function create()
     {
         $titres = Titre::all();
@@ -71,22 +92,37 @@ class InscrireController extends Controller
             'statut'    => 'required|max:255',
             //'npi' => 'required|max:255',
             //'photo' => 'mimes:jpg,png,jpeg',
-            'quartier_id' => 'required|max:255',
-            'arrondissement_id' => 'required|max:255',
-            'departement_id' => 'required|max:255',
-            'commune_id' => 'required|max:255',
+            //'pays' => 'required|max:255',
+            'commune_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'departement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'arrondissement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'quartier_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
 
+            // 'quartier_id' => 'required|max:255',
+            // 'arrondissement_id' => 'required|max:255',
+            // 'departement_id' => 'required|max:255',
+            // 'commune_id' => 'required|max:255',
+                
 
         ]);
 
-
-
-        $departement = Departement::findOrFail(intval($request->departement_id));
-        $commune = Commune::findOrFail(intval($request->commune_id));
-        $quartier = Quartier::findOrFail(intval($request->quartier_id));
-        $arrondissement = Arrondissement::findOrFail(intval($request->arrondissement_id));
-
-
+       
+       
+        if ($request->statut == 'Diaspora') {
+    // Si le statut est "Diaspora", vous pouvez simplement initialiser les variables à null
+    $departement = null;
+    $commune = null;
+    $quartier = null;
+    $arrondissement = null;
+    } else {
+    // Sinon, vous pouvez récupérer les données normalement
+    $departement = Departement::findOrFail(intval($request->departement_id));
+    $commune = Commune::findOrFail(intval($request->commune_id));
+    $quartier = Quartier::findOrFail(intval($request->quartier_id));
+    $arrondissement = Arrondissement::findOrFail(intval($request->arrondissement_id));
+}
+       
+        
         $admin = User::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
@@ -98,12 +134,14 @@ class InscrireController extends Controller
             'ravip' => $request->ravip,
             'profession' => $request->profession,
             'statut' => $request->statut,
+            'pays' => $request->pays,
             'npi' => $request->npi,
+            'status' => true,
             'photo' => 'Null',
-            'departement_id' => $departement->id,
-            'commune_id' => $commune->id,
-            'arrondissement_id' => $arrondissement->id,
-            'quartier_id' => $quartier->id,
+            'departement_id' => $departement ? $departement->id : null,
+            'commune_id' => $commune ? $commune->id : null,
+            'arrondissement_id' => $arrondissement ? $arrondissement->id : null,
+            'quartier_id' => $quartier ? $quartier->id : null,
 
 
         ]);

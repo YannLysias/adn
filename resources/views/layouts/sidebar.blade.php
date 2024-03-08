@@ -11,7 +11,7 @@
   <div class="menu_section">
 
     <ul class="nav side-menu">
-      <li><a href="/dashboard"><i class="fa fa-home"></i> Home</a>
+      <li><a href="/dashboard"><i class="fa fa-home"></i> Acceuil</a>
       </li>
       @else
       <div class="navbar nav_title" style="border: 0;">
@@ -28,18 +28,20 @@
 
             @if ( Auth::user()->type == "Administrateur" )
 
-            <li><a href="/adherant"><i class="fa fa-user"></i> Coordonnateurs</a>
-
+              <li><a href="/adherant"><i class="fa fa-user"></i>Adhérent/Coordonnateurs</a>
+              
+              <li><a href="/titre"><i class="fa fa-certificate"></i> Titres</a></li>
+              <li><a href="/diaspora"><i class="fa fa-globe"></i> Diasporas</a></li>
             </li>
 
             @endif
 
             @if ( Auth::user()->type == "Coordonnateur")
 
-            <li><a href="/adherant"><i class="fa fa-user"></i> Adhérants</a>
-            <li><a href="/titre"><i class="fa fa-table"></i> Titres </a>
-              
-              {{--
+            <li><a href="/adherant"><i class="fa fa-user"></i> Adhérants</a></li>
+            <li><a href="/titre"><i class="fa fa-certificate"></i> Titres</a></li>
+            <li><a href="/diaspora"><i class="fa fa-globe"></i> Diasporas</a></li>
+                          {{--
             <li><a href="/commentaire"><i class="fa fa-table"></i> Commentaire </a> --}}
 
             </li>
@@ -84,7 +86,11 @@
           <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown"
             data-toggle="dropdown" aria-expanded="false">
             <div class="user-info">
-              <img src="/storage/photos/{{Auth::user()->photo}}" alt="">
+              @if(Auth::user()->photo)
+              <img src="/storage/photos/{{ Auth::user()->photo }}" alt="Photo de profil">
+                @else
+                <img src="/storage/photos/images.png" alt="Photo de profil">
+                @endif
               <div class="user-details">
                 <h6>{{ Auth::user()->prenom }}</h6>
                 <div>{{ Auth::user()->type }}</div>
@@ -117,8 +123,7 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    font-size: inherit;
-    color: inherit;
+   
     text-decoration: none;
     display: block;
     width: 100%;

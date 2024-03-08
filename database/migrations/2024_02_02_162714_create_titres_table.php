@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('titres', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             
         });

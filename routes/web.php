@@ -5,6 +5,7 @@ use App\Http\Controllers\ArrondissementController;
 use App\Http\Controllers\AutreController;
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DiasporaController;
 use App\Http\Controllers\InscrireController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuartierController;
@@ -37,9 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('users-profile', adherantController::class)->only(['show']);
     
     Route::get('/generate-pdf', [adherantController::class, 'generatePDF'])->name('generate.pdf');
+    Route::resource('diaspora',DiasporaController::class );
     
-    Route::resource('commentaire', ContactController::class );
-
     Route::get('/get-communes/{departementId}/', [CommuneController::class, 'getCommunes'])->name('get-communes');
     Route::get('/get-arrondissements/{communeId}/', [ArrondissementController::class, 'getArrondissements'])->name('get-arrondissements');
     Route::get('/get-quartiers/{arrondissementId}/', [QuartierController::class, 'getQuartiers'])->name('get-quartiers');
@@ -54,14 +54,16 @@ Route::middleware('auth')->group(function () {
 
 /* les utilisateur nom connecter*/
     Route::get('/creer-admin', [UserController::class, 'createAdminAccount']);
+    
+    Route::resource('diaspora',DiasporaController::class );
 
     // Route::post('/inscrire', [InscrireController::class, 'store'])->name('inscription.store');
     // Route::get('/welcome', [InscrireController::class, 'index'])->name('welcome');
     
-
+   
 
     Route::resource('inscrire', InscrireController::class)->only([
-        'index', 'store', 'create', 'update', 'edit'
+        'index', 'store', 'create', 'update', 'edit', 'search'
     ]);
 
     // Route::resource('contact', ContactController::class );

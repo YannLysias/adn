@@ -106,6 +106,11 @@
             <span data-purecounter-start="0" style="color: #0b5e1e;" data-purecounter-end="{{$totalCoordonnateur}}" data-purecounter-duration="1" class="purecounter"></span>
             <p>Coordonnateur{{$totalCoordonnateur > 1 ? 's' : ''}}</p>
           </div>
+
+          <div class="col-lg-3 col-6 text-center mx-auto">
+            <span data-purecounter-start="0" style="color: #0b5e1e;" data-purecounter-end="{{$totalDiaspora}}" data-purecounter-duration="1" class="purecounter"></span>
+            <p>Diaspora{{$totalDiaspora > 1 ? 's' : ''}}</p>
+          </div>
     
           <div class="col-lg-3 col-6 text-center mx-auto">
             <span data-purecounter-start="0" style="color: #0b5e1e;" data-purecounter-end="{{$totalUser}}" data-purecounter-duration="1" class="purecounter"></span>

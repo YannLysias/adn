@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="assets/img/icon.png">
 
-    <title>Gentelella Alela! | </title>
+    <title>ADN Bénin </title>
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Liste des titres</h2>
+                    <h2>Liste des diasporas</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       </li>
                       
@@ -86,44 +86,55 @@
                     <p class="text-muted font-13 m-b-30">
                     </p>
                     <div class="d-flex justify-content-end">
-                      <a href="/titre/create" class="ml-auto">
+                      {{-- <a href="/diaspora/create" class="ml-auto">
                           <button type="button" class="btn btn-success">Ajouter</button>
+                      </a> --}}
+                      <div class="d-flex justify-content-end">
+                      <a href="{{ route('generate.pdf') }}" class="btn btn-primary btn-print">
+                        <i class="fa fa-print"></i> Imprimer
                       </a>
-                  </div>
+                    </div>
+                  </div> 
+
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
-                          <th>N°</th>
-                          <th>Titre</th>
-                          <th>Adhérent</th>
-                          
+
+                          <th>Nom</th>
+                          <th>Prénon</th>
+                          <th>Sexe</th>
+                          <th>Téléphone</th>
+                          <th>statut</th>
+                          <th>Pays</th>
                           <th>Manipulation</th>
+                          
                           
                         </tr>
                       </thead>
+
                       <tbody>
-                        @foreach ($titres as $index => $titre)
+                        @foreach ($diasporaUsers as $diasporaUser)
                           <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{$titre->libelle}}</td>
+                            <td>{{$diasporaUser->nom}}</td>
+                            <td>{{$diasporaUser->prenom}}</td>
+                            <td>{{$diasporaUser->sexe}}</td>
+                            <td>{{$diasporaUser->telephone}}</td>
+                            <td>{{$diasporaUser->statut}}</td>
+                            <td>{{$diasporaUser->pays}}</td>
                             <td>
-                              <a href="{{ route('titre.show', $titre->id) }}">
-                                {{$titre->users->count()}} Adhérent{{$titre->users->count() > 1 ? 's' : ''}}
-                              </a>
-                          </td>
-                            <td>
-                              <form action="{{ route('titre.destroy', $titre->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
-                                        
-                              <a href="/titre/{{$titre->id}}/edit" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                              <div class="btn-group">
+                                  <form action="{{ route('diaspora.destroy', $diasporaUser->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                  </form>
+                                  <a href="/diaspora/{{ $diasporaUser->id }}/edit" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                  <a href="{{ route('diaspora.show', ['diaspora' => $diasporaUser->id]) }}" class="btn btn-info"><i class="fa fa-info-circle"></i></a>
+                              </div>
                           </td>
                           </tr>
                         @endforeach
                       </tbody>
-                        
-                            </form>           
                                   
               </div>
 

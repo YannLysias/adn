@@ -12,6 +12,7 @@ use App\Notifications\NewCollaborateur;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
@@ -28,12 +29,16 @@ class adherantController extends Controller
     {
         if (auth()->user()->type === 'Coordonnateur') {
             $users = User::whereNotIn('type', ['Coordonnateur', 'Administrateur'])
+            ->where('quartier_id', Auth::user()->quartier_id)
             ->orderBy('id', 'desc')
             ->get();
+
         } elseif (auth()->user()->type === 'Administrateur') {
-            $users = User::where('type', 'Coordonnateur')->latest()
+            $users = User::whereIn('type', ['Coordonnateur', 'Adhérent'])
+            ->latest()
             ->orderBy('id', 'desc')
             ->get();
+
         } else {
             // Les autres types d'utilisateurs ne peuvent pas voir les coordonnateurs
             $users = [];
@@ -57,15 +62,25 @@ class adherantController extends Controller
             $options->set('isHtml5ParserEnabled', true);
             
             $dompdf = new Dompdf($options);
-            
+            $dompdf->setBasePath(public_path());
             // Récupérez les données des utilisateurs
             $adherants = User::all();
-            
+
             // Générez le contenu HTML du tableau
-            $html = view('adherant', compact('adherants'))->render();
+            $html = view('pdf', compact('adherants'))->render();
+
             
             // Chargez le contenu HTML dans Dompdf
             $dompdf->loadHtml($html);
+
+            // Activer la numérotation des pages
+            $options->set('isPhpEnabled', true);
+            $options->set('isHtml5ParserEnabled', true);
+            $options->set('isPhpEnabled', true);
+            $options->set('isHtml5ParserEnabled', true);
+
+            // Charger les options dans Dompdf
+            $dompdf->setOptions($options);
             
             // Rendre le PDF
             $dompdf->render();
@@ -159,9 +174,9 @@ class adherantController extends Controller
             'nom' => 'required|max:255',
             'prenom' => 'required|max:255',
             'sexe' => 'required|max:255',
-            'telephone' => 'required|max:255',
+            'telephone' => 'required|unique:users,telephone|max:255',
             'type' => 'required|max:255',
-            //'email' => 'required|email|unique:users,email',
+            'email' => 'nullable|email|unique:users,email',
             'password' => 'nullable|min:8',
             //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
@@ -169,19 +184,20 @@ class adherantController extends Controller
             //'npi' => 'required|max:255',
             //'photo' => 'required|mimes:jpg,png,jpeg',
             //'titre_id' => 'required|max:255',
-            'quartier_id' => 'required|max:255',
-            'arrondissement_id' => 'required|max:255',
-            'departement_id' => 'required|max:255',
-            'commune_id' => 'required|max:255',
+            'commune_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'departement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'arrondissement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'quartier_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
 
 
-        ]);
+        ]);    
 
-        // $users = User::where('email',  $request->email)
-        // ->orWhere('statut', true)->get();
-        // if(count($users) > 0){
-        //     return back()->withErrors(['role' => " Ce mail " . $request->email . "existe déjà"]);
-        // }
+        $quartierId = $request->quartier_id;
+        $users = User::where('quartier_id', $quartierId)->where('type', "Coordonnateur")->get();
+
+        if ($users->count() > 0) {
+            return back()->withErrors(['quartier_id' => "Un coordonnateur existe déjà dans ce quartier"]);
+        }
 
         if ($request->hasFile('photo')) {
             // Valider et stocker la photo
@@ -198,19 +214,31 @@ class adherantController extends Controller
         //     $path_photo_convert_to_table = explode('/', $path_photo);
         // }
 
-        $titre = Titre::findOrFail(intval($request->titre_id));
+      
 
-        $departement = Departement::findOrFail(intval($request->departement_id));
-        $commune = Commune::findOrFail(intval($request->commune_id));
-        $arrondissement = Arrondissement::findOrFail(intval($request->arrondissement_id));
-        $quartier = Quartier::findOrFail(intval($request->quartier_id));
+        if ($request->statut == 'Diaspora') {
+            // Si le statut est "Diaspora", vous pouvez simplement initialiser les variables à null
+            $departement = null;
+            $commune = null;
+            $quartier = null;
+            $arrondissement = null;
+            $titre = null;
+        } else {
+            // Sinon, vous pouvez récupérer les données normalement
+            $departement = Departement::findOrFail(intval($request->departement_id));
+            $commune = Commune::findOrFail(intval($request->commune_id));
+
+            $quartier = Quartier::findOrFail(intval($request->quartier_id));
+            $arrondissement = Arrondissement::findOrFail(intval($request->arrondissement_id));
+            $titre = Titre::find(intval($request->titre_id));
+
+        }
 
 
         
         if($request->type=='Coordonnateur')
             $generated_password = Str::random(8);
        
-
 
         $admin = User::create([
             'nom' => $request->nom,
@@ -224,11 +252,13 @@ class adherantController extends Controller
             'npi' => $request->npi,
             'photo' => $request->has('photo') ? $path_photo_convert_to_table[2] : null,
             'statut' => $request->statut,
-            'titre_id' => $titre->id,
-            'quartier_id' => $quartier->id,
-            'arrondissement_id' => $arrondissement->id,
-            'departement_id' => $departement->id,
-            'commune_id' => $commune->id,
+            'status' => true,
+            'titre_id' => $titre ? $titre->id : null,
+            'departement_id' => $departement ? $departement->id : null,
+            'commune_id' => $commune ? $commune->id : null,
+            'arrondissement_id' => $arrondissement ? $arrondissement->id : null,
+            'quartier_id' => $quartier ? $quartier->id : null,
+
 
         ]);
 

@@ -20,7 +20,9 @@ return new class extends Migration
             $table->string('type');
             $table->string('profession');
             $table->string('statut');
+            $table->boolean('status')->default(true);
             $table->string('photo')->nullable();
+            $table->string('pays')->nullable();
             $table->string('password')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('npi')->unique()->nullable();
@@ -29,10 +31,10 @@ return new class extends Migration
 
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('titre_id')->constrained()->nullable();
-            $table->foreignId('quartier_id')->constrained();
-            $table->foreignId('arrondissement_id')->constrained();
-            $table->foreignId('departement_id')->constrained();
-            $table->foreignId('commune_id')->constrained();
+            $table->foreignId('quartier_id')->constrained()->nullable();;
+            $table->foreignId('arrondissement_id')->constrained()->nullable();;
+            $table->foreignId('departement_id')->constrained()->nullable();;
+            $table->foreignId('commune_id')->constrained()->nullable();;
 
             $table->rememberToken();
             $table->timestamps();

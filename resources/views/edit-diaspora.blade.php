@@ -64,15 +64,15 @@
                 <div class="x_panel">
                     <div class="x_content">
 
-    <form class="" action="{{ route('adherant.update', $adherant->id)}}" method="post" enctype="multipart/form-data" novalidate>
+    <form class="" action="{{ route('diaspora.update', $diaspora->id)}}" method="post" enctype="multipart/form-data" novalidate>
         @csrf
-        @if ($adherant)
+        @if ($diaspora)
         @method('PUT')
         </p>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Nom<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->nom}}" name="nom"  placeholder="Nom en majuscule" required="required" />
+                <input class="form-control" value="{{$diaspora->nom}}" name="nom"  placeholder="Nom en majuscule" required="required" />
             </div>
             @error('nom')
             <div class="d-block text-danger">{{$message}}</div>
@@ -81,7 +81,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Prenom<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->prenom}}" class='optional' name="prenom" data-validate-length-range="5,15" type="text" />
+                <input class="form-control" value="{{$diaspora->prenom}}" class='optional' name="prenom" data-validate-length-range="5,15" type="text" />
             </div>
             @error('prenom')
             <div class="d-block text-danger">{{$message}}</div>
@@ -90,10 +90,10 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Sexe<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="choix" value="{{$adherant->sexe}}" name="sexe" class="form-control forms-control-lg">
+            <select id="choix" value="{{$diaspora->sexe}}" name="sexe" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisir</option>
-                <option value="Masculin" @selected($adherant->sexe == 'Masculin' ? true : false)>M</option>
-                <option value="Feminin" @selected($adherant->sexe == 'Feminin' ? true : false)>F</option>
+                <option value="Masculin" @selected($diaspora->sexe == 'Masculin' ? true : false)>M</option>
+                <option value="Feminin" @selected($diaspora->sexe == 'Feminin' ? true : false)>F</option>
             </select>
             </div>
             @error('sexe')
@@ -103,7 +103,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Email</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->email}}" name="email" class='email' type="email" />
+                <input class="form-control" value="{{$diaspora->email}}" name="email" class='email' type="email" />
             </div>
             @error('email')
             <div class="d-block text-danger">{{$message}}</div>
@@ -112,7 +112,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->telephone}}" type="tel" class='tel' name="telephone" required='required' data-validate-length-range="8,20" />
+                <input class="form-control" value="{{$diaspora->telephone}}" type="tel" class='tel' name="telephone" required='required' data-validate-length-range="8,20" />
             </div>
             @error('telephone')
             <div class="d-block text-danger">{{$message}}</div>
@@ -121,7 +121,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Profession<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->profession}}" class='optional' name="profession" data-validate-length-range="5,15" type="text" />
+                <input class="form-control" value="{{$diaspora->profession}}" class='optional' name="profession" data-validate-length-range="5,15" type="text" />
             </div>
             @error('profession')
             <div class="d-block text-danger">{{$message}}</div>
@@ -130,11 +130,10 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align" required>Statut<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="choix" value="{{$adherant->statut}}" name="statut" class="form-control forms-control-lg">
+            <select id="choix" value="{{$diaspora->statut}}" name="statut" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisir</option>
-                <option value="Au Chômage" @selected($adherant->statut == 'Au Chômage' ? true : false)>Au Chômage</option>
-                <option value="En Activité" @selected($adherant->statut == 'En Activité' ? true : false)>En Activité</option>
                 
+                <option value="Diaspora" @selected($diaspora->statut == 'Diaspora' ? true : false)>Diaspora</option>
             </select>
         </div>
             @error('statut')
@@ -144,144 +143,24 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">type<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="choix" value="{{$adherant->type}}" name="type" class="form-control forms-control-lg">
-                @if(Auth::user()->type === 'Administrateur')
-                <option value="Coordonnateur" @selected($adherant->type == 'Coordonnateur' ? true : false)>Coordonnateur</option>
-                @elseif (Auth::user()->type === 'Coordonnateur')
-                <option value="Adhérent" @selected($adherant->type == 'Adhérent' ? true : false)>Adhérent</option>
-                @endif
+            <select id="choix" value="{{$diaspora->type}}" name="type" class="form-control forms-control-lg">
+                <option value="Adhérent" @selected($diaspora->type == 'Adhérent' ? true : false)>Adhérent</option>
             </select>
             </div>
             @error('type')
             <div class="d-block text-danger">{{$message}}</div>
             @enderror
         </div>
-
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Pays<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->npi}}" type="number" class='tel' name="npi" data-validate-length-range="8,20" />
+                <input class="form-control" value="{{$diaspora->pays}}" class='optional' name="pays" data-validate-length-range="5,15" type="text" />
             </div>
-            @error('npi')
+            @error('profession')
             <div class="d-block text-danger">{{$message}}</div>
             @enderror
         </div>
-        <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">RAVIP</label>
-            <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->ravip}}" type="number" class='tel' name="ravip" data-validate-length-range="8,20" />
-            </div>
-            @error('ravip')
-            <div class="d-block text-danger">{{$message}}</div>
-            @enderror
-        </div>
-        {{-- <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Mot de
-                passe<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6">
-                <input class="form-control" value="{{$adherant->password}}" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}" title="Minimum 8 caractères dont une lettre majuscule et minuscule, un chiffre et un caractère unique" required />
-
-                <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()">
-                    <i id="slash" class="fa fa-eye-slash"></i>
-                    <i id="eye" class="fa fa-eye"></i>
-                </span>
-            </div>
-            @error('password')
-            <div class="d-block text-danger">{{$message}}</div>
-            @enderror
-        </div> --}}
-
-        <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Titres<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6">
-            <select id="choix" name="titre_id" value="{{$adherant->titre_id}}" class="form-control forms-control-lg">
-                <option value="" disabled selected>Choisissez un Titre</option>
-                @foreach ($titres as $titre)
-                <option value="{{$titre ->id}}" @selected( $adherant->id == $titre->titre_id ?  true : false)>{{$titre->libelle}}</option>
-                @endforeach
-                @error('titre_id')
-                <div class="d-block text-danger">{{$message}}</div>
-                @enderror
-            </select>
-        </div>
-        </div>
-
-        <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3 label-align">Departement<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6">
-            <select id="departement_id" value="{{$adherant->departement_id}}" name="departement_id" class="form-control forms-control-lg">
-                <option value="" disabled selected>Choisissez un departement
-                </option>
-                @foreach ($departements as $departement)
-                <option value="{{$departement->id}}" @selected($departement->id == $adherant->departement_id ? true : false)>{{$departement->libelle}}
-                </option>
-                @endforeach
-                @error('departement_id')
-                <div class="d-block text-danger">{{$message}}</div>
-                @enderror
-            </select>
-        </div>
-        </div>
-        <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Commune<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6">
-            <select id="commune_id" value="{{$adherant->commune_id}}"  name="commune_id" class="form-control forms-control-lg">
-                <option value="" disabled selected>Choisissez une commune
-                </option>
-                @foreach ($communes as $commune)
-                <option value="{{$commune ->id}}" @selected($commune->id == $adherant->commune_id ? true : false)>{{$commune->libelle}}</option>
-                @endforeach
-                @error('commune_id')
-                <div class="d-block text-danger">{{$message}}</div>
-                @enderror
-            </select>
-        </div>
-        </div>
-        <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Arrondissement<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6">
-            <select id="arrondissement_id" value="{{$adherant->arrondissement_id}}" name="arrondissement_id" class="form-control forms-control-lg">
-                <option value="" disabled selected>Choisissez un Arrondissement
-                </option>
-                @foreach ($arrondissements as $arrondissement)
-                <option value="{{$arrondissement ->id}}" @selected($arrondissement->id == $adherant->arrondissement_id ? true : false)>
-                    {{$arrondissement->libelle}}</option>
-                @endforeach
-                @error('arrondissement_id')
-                <div class="d-block text-danger">{{$message}}</div>
-                @enderror
-            </select>
-        </div>
-        </div>
-        <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Quartier<span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6">
-            <select id="quartier_id" value="{{$adherant->quartier_id}}" name="quartier_id" class="form-control forms-control-lg">
-                <option value="" disabled selected>Choisissez un Quartier
-                </option>
-                @foreach ($quartiers as $quartier)
-                <option value="{{$quartier ->id}}" @selected($quartier->id == $adherant->quartier_id ? true : false)>{{$quartier->libelle}}
-                </option>
-                @endforeach
-                @error('quartier_id')
-                <div class="d-block text-danger">{{$message}}</div>
-                @enderror
-            </select>
-        </div>
-        </div>
-
-
-    <div class="field item form-group">
-    <label class="col-form-label col-md-3 col-sm-3  label-align">Photo</label>
-    <div class="col-md-6 col-sm-6">
-    <input type="file" value="{{$adherant->photo}}" id="photo" name="photo" accept="image/*" class="form-control forms-control-lg">
-</div>
-    @error('photo')
-    <div class="d-block text-danger">{{$message}}</div>
-    @enderror
-    </div>
-
-    <div class="ln_solid">
+        
     <div class="form-group">
         <div class="col-md-6 offset-md-3">
             <button type='submit' class="btn btn-primary">Soumettre</button>

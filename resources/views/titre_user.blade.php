@@ -18,7 +18,7 @@
     <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -45,12 +45,6 @@
             <!-- sidebar menu -->
             @include('layouts.sidebar')
 
-        <!-- top navigation -->
-       
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -70,7 +64,7 @@
         <div class="col-md-12 col-sm-12 ">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Liste des Adherents</h2>
+              <h2>Liste des Adhérents par titre</h2>
               <ul class="nav navbar-right panel_toolbox">
                 </li>
 
@@ -84,90 +78,35 @@
                   <div class="card-box table-responsive">
                     <p class="text-muted font-13 m-b-30">
                     </p>
-
                     
-                    <div class="d-flex justify-content-end">
-                      <a href="{{ route('generate.pdf') }}" class="btn btn-primary btn-print">
-                        <i class="fa fa-print"></i> Imprimer
-                      </a>
-                      <a href="adherant/create" class="ml-auto">
-                        <button type="button" class="btn btn-success">Ajouter</button>
-                      </a>
-                    </div>
-                    <div style="display: flex;">
-
-                      <select id="departement_ID"
-                        style="height: 60px;  margin-right: 10px;  border-radius: 8px; padding: 5px; width: 50% ;border: 2px solid #ccc;"
-                        class="form-select" aria-label="Default select example">
-                        <option value="" disabled selected>Choisissez un departement</option>
-                        @foreach ($departements as $departement)
-                        <option value="{{$departement ->id}}">{{$departement->libelle}}</option>
-                        @endforeach
-                      </select>
-
-                      <select id="commune_ID"
-                        style="height: 60px;  margin-right: 10px;  border-radius: 8px; padding: 5px; width: 50% ;border: 2px solid #ccc;" class="
-                        form-select" aria-label="Default select example">
-                        <option value="" disabled selected>Choisissez une commune</option>
-                        @foreach ($communes as $commune)
-                        <option value="{{$commune ->id}}">{{$commune->libelle}}</option>
-                        @endforeach
-                      </select>
-                      <select id="arrondissement_ID" class="form-select"
-                        style="height: 60px; margin-right: 10px; border-radius: 8px; padding: 5px; width: 50%; border: 2px solid #ccc;"
-                        aria-label="Default select example">
-                        <option value="" disabled selected>Choisissez un arrondissement</option>
-                        @foreach ($arrondissements as $arrondissement)
-                        <option value="{{$arrondissement->id}}">{{$arrondissement->libelle}}</option>
-                        @endforeach
-                      </select>
-
-
-                      <select id="quartier_ID"
-                        style="height: 60px;  margin-right: 10px;  border-radius: 8px; padding: 5px; width: 50% ;border: 2px solid #ccc;"
-                        class="form-select" aria-label="Default select example">
-                        <option value="" disabled selected>Choisissez un quartier</option>
-                        @foreach ($quartiers as $quartier)
-                        <option value="{{$quartier ->id}}">{{$quartier->libelle}}</option>
-                        @endforeach
-
-                      </select>
-                    </div><br>
-
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                      
                       <thead>
+                        <div>
+                          <h3><u>Titre</u>: {{ $titre->libelle }}</h3>
+                        </div>
                           <tr>
-                              <th>N°</th>
+                              
                               <th>Nom</th>
                               <th>Prénom</th>
                               <th>Sexe</th>
                               <th>Téléphone</th>
                               <th>Profession</th>
                               <th>Statut</th>
-                              <th>Manipulation</th>
                           </tr>
+
                       </thead>
-                      <tbody id="listAdherant">
-                          @foreach ($adherants as $index => $adherant)
-                          <tr>
-                              <td>{{ $index + 1 }}</td>
-                              <td>{{ $adherant->nom }}</td>
-                              <td>{{ $adherant->prenom }}</td>
-                              <td>{{ $adherant->sexe }}</td>
-                              <td>{{ $adherant->telephone }}</td>
-                              <td>{{ $adherant->profession }}</td>
-                              <td>{{ $adherant->statut }}</td>
-                              <td>
-                                  <div class="btn-group">
-                                      <form action="{{ route('adherant.destroy', $adherant->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
-                                      </form>
-                                      <a href="/adherant/{{ $adherant->id }}/edit" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                      <a href="{{ route('adherant.show', ['adherant' => $adherant->id]) }}" class="btn btn-info"><i class="fa fa-info-circle"></i></a>
-                                  </div>
-                              </td>
+                      <tbody>
+                        @foreach ($titre->users as $user)
+                            <tr>
+                            <td>{{ $user->nom }}</td>
+                            <td>{{ $user->prenom }}</td>
+                            <td>{{ $user->sexe }}</td>
+                            <td>{{ $user->telephone }}</td>
+                            <td>{{ $user->profession }}</td>
+                            <td>{{ $user->statut }}</td>
+                            {{-- <td>{{ $user->quartier->libelle }}</td> --}}
+                            </td>
                           </tr>
                           @endforeach
                       </tbody>
@@ -219,10 +158,10 @@
 
     <script>
       // Attachez un gestionnaire d'événements au clic sur le bouton d'impression
-      // document.querySelector('.btn-print').addEventListener('click', function(e) {
-          // e.preventDefault(); // Empêche le comportement par défaut du lien
-          // window.print(); // Déclenche l'impression de la page actuelle
-      // });
+      document.querySelector('.btn-print').addEventListener('click', function(e) {
+          e.preventDefault(); // Empêche le comportement par défaut du lien
+          window.print(); // Déclenche l'impression de la page actuelle
+      });
   </script>
 
     <script>
