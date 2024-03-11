@@ -20,7 +20,7 @@ class AutreController extends Controller
         $totalUser = User::all()->count();
         $totalAdherants = User::where('type', 'Adhérent')->count();
         $totalCoordonnateur = User::where('type', 'Coordonnateur')->count();
-        $totalDiaspora = User::where('statut', 'Diaspora')->count();
+        $totalDiaspora = User::where('categorie', 'Diaspora')->count();
 
         // Parcourir chaque département et compter le nombre d'adhérents associés
         foreach ($departements as $departement) {
@@ -52,7 +52,7 @@ class AutreController extends Controller
         $totalUser = User::all()->count();
         $totalAdherants = User::where('type', 'Adhérent')->count();
         $totalCoordonnateur = User::where('type', 'Coordonnateur')->count();
-        $totalDiaspora = User::where('statut', 'Diaspora')->count();
+        $totalDiaspora = User::where('categorie', 'Diaspora')->count();
 
         // Parcourir chaque département et compter le nombre d'adhérents associés
         foreach ($departements as $departement) {

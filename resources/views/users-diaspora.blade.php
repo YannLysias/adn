@@ -86,7 +86,7 @@
                               </div>
             
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Role</div>
+                                <div class="col-lg-3 col-md-4 label">Type</div>
                                 <div class="col-lg-9 col-md-8">{{ $diaspora->type }}</div>
                               </div>
             
@@ -113,6 +113,10 @@
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Statut</div>
                                 <div class="col-lg-9 col-md-8">{{ $diaspora->statut }}</div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Categorie</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->categorie }}</div>
                               </div>
 
                               <div class="row">

@@ -136,7 +136,7 @@ class InscrireController extends Controller
             'statut' => $request->statut,
             'pays' => $request->pays,
             'npi' => $request->npi,
-            'status' => true,
+            'active' => true,
             'photo' => 'Null',
             'departement_id' => $departement ? $departement->id : null,
             'commune_id' => $commune ? $commune->id : null,

@@ -88,12 +88,12 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Sexe<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="choix"  value="{{ old('sexe') }}" class="form-control forms-control-lg" name="sexe" >
-                <option value="" disabled selected>Choisir</option>
-                <option value="Masculin">M</option>
-                <option value="Feminin">F</option>
-            </select>
-        </div>
+                <select id="choix" class="form-control forms-control-lg" name="sexe">
+                    <option value="" disabled selected>Choisir</option>
+                    <option value="Masculin" {{ old('sexe') == 'Masculin' ? 'selected' : '' }}>Masculin</option>
+                    <option value="Feminin" {{ old('sexe') == 'Feminin' ? 'selected' : '' }}>Féminin</option>
+                </select>
+            </div>
             @error('sexe')
                 <div class="d-block text-danger">{{$message}}</div>
             @enderror
@@ -126,33 +126,33 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Statut<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Statut<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="choix"  value="{{ old('statut') }}" class="form-control forms-control-lg" name="statut" required>
-                <option value="" disabled selected>Choisir</option>
-                <option value="Au Chômage">Au Chômage</option>
-                <option value="En Activiter">En Activité</option>
-            </select>
-        </div>
-            @error('statut')
-            <div class="d-block text-danger">{{$message}}</div>
-            @enderror
+                <select id="choix" class="form-control forms-control-lg" name="statut" required>
+                    <option value="" disabled selected>Choisir</option>
+                    <option value="Au Chômage" {{ old('statut') == 'Au Chômage' ? 'selected' : '' }}>Au Chômage</option>
+                    <option value="En Activiter" {{ old('statut') == 'En Activiter' ? 'selected' : '' }}>En Activité</option>
+                </select>
+                @error('statut')
+                    <div class="d-block text-danger">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">type<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Type<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="choix"  value="{{ old('type') }}" class="form-control forms-control-lg" name="type" required>
-                <option value="" disabled selected>Choisir</option>
-                @if(Auth::user()->type === 'Administrateur')
-                    <option value="Coordonnateur">Coordonnateur</option>
-                @elseif (Auth::user()->type === 'Coordonnateur')
-                    <option value="Adhérent">Adhérent</option>
-                @endif
-            </select>
-        </div>
-            @error('type')
-            <div class="d-block text-danger">{{$message}}</div>
-            @enderror
+                <select id="choix" class="form-control forms-control-lg" name="type" required>
+                    <option value="" disabled>Choisir</option>
+                    @if(Auth::user()->type === 'Administrateur')
+                        <option value="Coordonnateur">Coordonnateur</option>
+                    @elseif (Auth::user()->type === 'Coordonnateur')
+                        <option value="Adhérent">Adhérent</option>
+                    @endif
+                </select>
+                @error('type')
+                    <div class="d-block text-danger">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
@@ -193,10 +193,12 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Titres</label>
             <div class="col-md-6 col-sm-6">
-            <select id="choix" value="{{ old('titre_id') }}" name="titre_id" class="form-control forms-control-lg">
+            <select id="choix" name="titre_id" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisissez un Titre</option>
                 @foreach ($titres as $titre)
-                <option value="{{$titre ->id}}">{{$titre->libelle}}</option>
+                <option value="{{ $titre->id }}" {{ old('titre_id') == $titre->id ? 'selected' : '' }}>
+                    {{ $titre->libelle }}
+                </option>
                 @endforeach
                 @error('titre_id')
                 <div class="d-block text-danger">{{$message}}</div>
@@ -209,11 +211,13 @@
             
             <label class="col-form-label col-md-3 col-sm-3 label-align">Departement<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="departement_id" value="{{ old('departement_id') }}" name="departement_id" class="form-control forms-control-lg" required>
+            <select id="departement_id" name="departement_id" class="form-control forms-control-lg" required>
                 <option value=""  disabled selected>Choisissez un departement
                 </option>
                 @foreach ($departements as $departement)
-                <option value="{{$departement->id}}">{{$departement->libelle}}
+                <option value="{{ $departement->id }}" {{ old('departement_id') == $departement->id ? 'selected' : '' }}>
+                    {{ $departement->libelle }}
+                </option>
                 </option>
                 @endforeach
                 @error('departement_id')

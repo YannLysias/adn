@@ -45,6 +45,7 @@
         .styled-table tbody tr:last-of-type {
             border-bottom: 2px solid #0b5e1e;
         }
+
     </style>
 
 </head>

@@ -38,7 +38,6 @@ class adherantController extends Controller
             ->latest()
             ->orderBy('id', 'desc')
             ->get();
-
         } else {
             // Les autres types d'utilisateurs ne peuvent pas voir les coordonnateurs
             $users = [];
@@ -168,6 +167,7 @@ class adherantController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $validateData = $request->validate([
@@ -216,7 +216,7 @@ class adherantController extends Controller
 
       
 
-        if ($request->statut == 'Diaspora') {
+        if ($request->categorie == 'Diaspora') {
             // Si le statut est "Diaspora", vous pouvez simplement initialiser les variables à null
             $departement = null;
             $commune = null;
@@ -227,7 +227,6 @@ class adherantController extends Controller
             // Sinon, vous pouvez récupérer les données normalement
             $departement = Departement::findOrFail(intval($request->departement_id));
             $commune = Commune::findOrFail(intval($request->commune_id));
-
             $quartier = Quartier::findOrFail(intval($request->quartier_id));
             $arrondissement = Arrondissement::findOrFail(intval($request->arrondissement_id));
             $titre = Titre::find(intval($request->titre_id));
@@ -252,7 +251,7 @@ class adherantController extends Controller
             'npi' => $request->npi,
             'photo' => $request->has('photo') ? $path_photo_convert_to_table[2] : null,
             'statut' => $request->statut,
-            'status' => true,
+            'active' => false,
             'titre_id' => $titre ? $titre->id : null,
             'departement_id' => $departement ? $departement->id : null,
             'commune_id' => $commune ? $commune->id : null,

@@ -74,22 +74,18 @@
                                 @csrf
 
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Nom<span
-                                            class="required">*</span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Nom<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" name="nom" placeholder="Nom en majuscule"
-                                            required="required" value="{{ old('nom') }}" />
+                                        <input class="form-control" name="nom"  placeholder="Nom en majuscule" required="required" value="{{ old('nom') }}"/>
                                     </div>
                                     @error('nom')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Prenom<span
-                                            class="required">*</span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Prenom<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" class='optional' name="prenom" required="required"
-                                            data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}" />
+                                        <input class="form-control" class='optional' placeholder="La première lettre en majuscule" name="prenom" data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}"/>
                                     </div>
                                     @error('prenom')
                                     <div class="d-block text-danger">{{$message}}</div>
@@ -98,217 +94,188 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Sexe<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                    <select  value="{{ old('sexe') }}" class="form-control forms-control-lg" name="sexe" >
-                                        <option value="" disabled selected>Choisir</option>
-                                        <option value="Masculin">M</option>
-                                        <option value="Feminin">F</option>
-                                    </select>
-                                </div>
+                                        <select id="choix" class="form-control forms-control-lg" name="sexe">
+                                            <option value="" disabled selected>Choisir</option>
+                                            <option value="Masculin" {{ old('sexe') == 'Masculin' ? 'selected' : '' }}>Masculin</option>
+                                            <option value="Feminin" {{ old('sexe') == 'Feminin' ? 'selected' : '' }}>Féminin</option>
+                                        </select>
+                                    </div>
                                     @error('sexe')
                                         <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Email<span
-                                            class=""></span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Email</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" name="email"  class='email'
-                                             type="email" value="{{ old('email') }}" />
+                                        <input class="form-control" name="email" class='email' placeholder="Saisissez votre Email"  type="email"  value="{{ old('email') }}"/>
                                     </div>
                                     @error('email')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span
-                                            class="required">*</span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" type="tel" class='tel' name="telephone"
-                                            required='required' data-validate-length-range="8,20"
-                                            value="{{ old('telephone') }}" />
+                                        <input class="form-control" type="tel" class='tel' placeholder="Saisissez votre Numéro" name="telephone" required='required' data-validate-length-range="8,20"  value="{{ old('telephone') }}"/>
                                     </div>
                                     @error('telephone')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Profession<span
-                                            class="required">*</span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Profession<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" class='optional' required="required"
-                                            name="profession"  type="text"
-                                            value="{{ old('prenom') }}" />
+                                        <input class="form-control" class='optional' name="profession" placeholder="Saisissez votre Profession" data-validate-length-range="5,15" type="text" value="{{ old('profession') }}" />
                                     </div>
                                     @error('profession')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Statut<span
-                                            class="required">*</span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Statut<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <select id="choix" value="{{ old('statut') }}" required="required"
-                                            class="form-control forms-control-lg" name="statut" required>
+                                        <select id="choix" class="form-control forms-control-lg" name="statut" required>
                                             <option value="" disabled selected>Choisir</option>
-                                            <option value="Diaspora">Diaspora</option>
-                                            <option value="En Chômage">Au Chômage</option>
-                                            <option value="En Activiter">En Activité</option>
+                                            <option value="Au Chômage" {{ old('statut') == 'Au Chômage' ? 'selected' : '' }}>Au Chômage</option>
+                                            <option value="En Activiter" {{ old('statut') == 'En Activiter' ? 'selected' : '' }}>En Activité</option>
                                         </select>
+                                        @error('statut')
+                                            <div class="d-block text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    @error('statut')
-                                    <div class="d-block text-danger">{{$message}}</div>
-                                    @enderror
                                 </div>
-
+                                
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">PAYS<span
-                                            class="required">*</span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" id="ville" placeholder="Entrez une ville" class='optional' name="pays" 
-                                            type="text" value="{{ old('pays') }}" />
-                                            <div id="suggestions" class="suggestions-container"></div>
-                                        </div>
-                                    @error('pays')
+                                        <input class="form-control" type="number" class='tel'
+                                            name="npi" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro NPI" value="{{ old('npi') }}" />
+                                    </div>
+                                    @error('npi')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
-                    
-                                {{-- <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">type<span
-                                            class="required">*</span></label>
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">RAVIP</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <select id="choix" value="{{ old('type') }}" required="required"
-                                            class="form-control forms-control-lg" name="type" required>
-                                            <option value="">Choisir</option>
-                                            <option value="Aucun">Aucun</option>
-                                        </select>
+                                        <input class="form-control" type="number" class='tel'
+                                            name="ravip" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro RAVIP" value="{{ old('ravip') }}" />
                                     </div>
-                                    @error('type')
+                                    @error('ravip')
+                                    <div class="d-block text-danger">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                {{-- <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Mot de
+                                        passe<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input class="form-control" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}" title="Minimum 8 caractères dont une lettre majuscule et minuscule, un chiffre et un caractère unique" required  value="{{ old('password') }}"/>
+                        
+                                        <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()">
+                                            <i id="slash" class="fa fa-eye-slash"></i>
+                                            <i id="eye" class="fa fa-eye"></i>
+                                        </span>
+                                    </div>
+                                    @error('password')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div> --}}
-
-
-                                {{-- champ masqué  --}}
-                                <div id="pays" style="display: grid" class="field item form-group">
-
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input class="form-control" type="number" class='tel'
-                                                name="npi" data-validate-length-range="9,20" value="{{ old('npi') }}" />
-                                        </div>
-                                        @error('npi')
+                        
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Titres</label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <select id="choix" name="titre_id" class="form-control forms-control-lg">
+                                        <option value="" disabled selected>Choisissez un Titre</option>
+                                        @foreach ($titres as $titre)
+                                        <option value="{{ $titre->id }}" {{ old('titre_id') == $titre->id ? 'selected' : '' }}>
+                                            {{ $titre->libelle }}
+                                        </option>
+                                        @endforeach
+                                        @error('titre_id')
                                         <div class="d-block text-danger">{{$message}}</div>
                                         @enderror
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">RAVIP</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input class="form-control" type="number" class='tel'
-                                                name="ravip" data-validate-length-range="9,20" value="{{ old('ravip') }}" />
-                                        </div>
-                                        @error('ravip')
+                                    </select>
+                                </div>
+                                </div>
+                        
+                                <div class="field item form-group">
+                                    
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Departement<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <select id="departement_id" name="departement_id" class="form-control forms-control-lg" required>
+                                        <option value=""  disabled selected>Choisissez un departement
+                                        </option>
+                                        @foreach ($departements as $departement)
+                                        <option value="{{ $departement->id }}" {{ old('departement_id') == $departement->id ? 'selected' : '' }}>
+                                            {{ $departement->libelle }}
+                                        </option>
+                                        </option>
+                                        @endforeach
+                                        @error('departement_id')
                                         <div class="d-block text-danger">{{$message}}</div>
                                         @enderror
-                                    </div>
-    
-                                    <div class="field item form-group">
-    
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Departement<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="departement_id" value="{{ old('departement_id') }}"
-                                                 name="departement_id"
-                                                class="form-control forms-control-lg" >
-                                                <option value="" disabled selected>Choisissez un departement
-                                                </option>
-                                                @foreach ($departements as $departement)
-                                                <option value="{{$departement->id}}">{{$departement->libelle}}
-                                                </option>
-                                                @endforeach
-                                                @error('departement_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">Commune<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="commune_id" value="{{ old('commune_id') }}" name="commune_id"
-                                                 class="form-control forms-control-lg">
-                                                <option value="" disabled selected>Choisissez une commune
-                                                </option>
-                                                {{-- @foreach ($communes as $commune)
-                                                <option value="{{$commune ->id}}">{{$commune->libelle}}</option>
-                                                @endforeach
-                                                @error('commune_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">Arrondissement<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="arrondissement_id" value="{{ old('arrondissement_id') }}"
-                                                name="arrondissement_id" class="form-control forms-control-lg">
-                                                <option value="" disabled selected>Choisissez un Arrondissement
-                                                </option>
-                                                {{-- @foreach ($arrondissements as $arrondissement)
-                                                <option value="{{$arrondissement ->id}}">
-                                                    {{$arrondissement->libelle}}</option>
-                                                @endforeach
-                                                @error('arrondissement_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror --}}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-3 col-sm-3  label-align">Quartier<span
-                                                class="">*</span></label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <select id="quartier_id" value="{{ old('quartier_id') }}" name="quartier_id"
-                                                class="form-control forms-control-lg">
-                                                <option value="" disabled selected>Choisissez un Quartier
-                                                </option>
-                                                {{-- @foreach ($quartiers as $quartier)
-                                                <option value="{{$quartier ->id}}">{{$quartier->libelle}}
-                                                </option>
-                                                @endforeach
-                                                @error('quartier_id')
-                                                <div class="d-block text-danger">{{$message}}</div>
-                                                @enderror --}}
-                                            </select>
-                                        </div>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Commune<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <select id="commune_id" value="{{ old('commune_id') }}" name="commune_id" class="form-control forms-control-lg" required>
+                                        <option value="" disabled selected>Choisissez une commune
+                                        </option>
+                                        {{-- @foreach ($communes as $commune)
+                                        <option value="{{$commune ->id}}">{{$commune->libelle}}</option>
+                                        @endforeach
+                                        @error('commune_id')
+                                        <div class="d-block text-danger">{{$message}}</div>
+                                        @enderror --}}
+                                    </select>
                                     </div>
                                 </div>
-                                {{-- champ masqué  --}}
-
-
-                                {{-- <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Photo<span
-                                            class=""></span></label>
-                                    <input type="file" id="photo" value="{{ old('photo') }}" name="photo"
-                                        accept="image/*">
-                                    @error('photo')
-                                    <div class="d-block text-danger">{{$message}}</div>
-                                    @enderror
-                                </div> --}}
-
-                                <div class="ln_solid">
-                                    <div class="form-group">
-                                        <div class="col-md-6 offset-md-3">
-                                            <button type='submit' class="btn btn-primary">Soumettre</button>
-                                            <button type='reset' class="btn btn-danger">Annuler</button>
-                                        </div>
-                                    </div>
-
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Arrondissement<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <select id="arrondissement_id" value="{{ old('arrondissement_id') }}" name="arrondissement_id" class="form-control forms-control-lg" required>
+                                        <option value="" disabled selected>Choisissez un Arrondissement
+                                        </option>
+                                        {{-- @foreach ($arrondissements as $arrondissement)
+                                        <option value="{{$arrondissement ->id}}">
+                                            {{$arrondissement->libelle}}</option>
+                                        @endforeach
+                                        @error('arrondissement_id')
+                                        <div class="d-block text-danger">{{$message}}</div>
+                                        @enderror --}}
+                                    </select>
                                 </div>
+                                </div>
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Quartier<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                    <select id="quartier_id" value="{{ old('quartier_id') }}" name="quartier_id" class="form-control forms-control-lg" required>
+                                        <option value="" disabled selected>Choisissez un Quartier
+                                        </option>
+                                        {{-- @foreach ($quartiers as $quartier)
+                                        <option value="{{$quartier ->id}}">{{$quartier->libelle}}
+                                        </option>
+                                        @endforeach
+                                        @error('quartier_id')
+                                        <div class="d-block text-danger">{{$message}}</div>
+                                        @enderror --}}
+                                    </select>
+                                         @error('quartier_id')
+                                        <div class="d-block text-danger">{{$message}}</div>
+                                        @enderror 
+                                </div>
+                                </div>
+                        
+                            <div class="ln_solid">
+                            <div class="form-group">
+                                <div class="col-md-6 offset-md-3">
+                                    <button type='submit' class="btn btn-primary">Soumettre</button>
+                                    <button type='reset' class="btn btn-success">Annuler</button>
+                                </div>
+                            </div>
+                            </div>
                             </form>
 
 

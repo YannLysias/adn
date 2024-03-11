@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('type');
             $table->string('profession');
             $table->string('statut');
-            $table->boolean('status')->default(true);
+            $table->string('categorie')->nullable();
+            // $table->boolean('status')->default(true);
+            // $table->boolean('status')->default(false);
+            $table->boolean('active')->default(false);
             $table->string('photo')->nullable();
             $table->string('pays')->nullable();
             $table->string('password')->nullable();

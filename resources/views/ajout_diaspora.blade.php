@@ -124,7 +124,7 @@
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" type="tel" class='tel' name="telephone"
-                                            required='required' data-validate-length-range="8,20"
+                                            required='required' 
                                             value="{{ old('telephone') }}" />
                                     </div>
                                     @error('telephone')
@@ -156,6 +156,20 @@
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>                                
+
+                                <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Statut<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <select id="choix" class="form-control forms-control-lg" name="statut" required>
+                                            <option value="" disabled selected>Choisir</option>
+                                            <option value="Au Chômage" {{ old('statut') == 'Au Chômage' ? 'selected' : '' }}>Au Chômage</option>
+                                            <option value="En Activiter" {{ old('statut') == 'En Activiter' ? 'selected' : '' }}>En Activité</option>
+                                        </select>
+                                        @error('statut')
+                                            <div class="d-block text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
 
                                 <div class="ln_solid">
                                     <div class="form-group">

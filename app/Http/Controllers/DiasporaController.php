@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -14,7 +16,7 @@ class DiasporaController extends Controller
     public function index()
     {
        
-        $diasporaUsers = User::where('statut', 'Diaspora')->get();
+        $diasporaUsers = User::where('categorie', 'Diaspora')->get();
 
         return view('diaspora', ['diasporaUsers' => $diasporaUsers]);
     }
@@ -22,9 +24,44 @@ class DiasporaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+     public function generatePDF()
+     {
+             $options = new Options();
+             $options->set('isHtml5ParserEnabled', true);
+             
+             $dompdf = new Dompdf($options);
+             $dompdf->setBasePath(public_path());
+             // Récupérez les données des utilisateurs
+             $adherants = User::all();
+ 
+             // Générez le contenu HTML du tableau
+             $html = view('pdf', compact('adherants'))->render();
+ 
+             
+             // Chargez le contenu HTML dans Dompdf
+             $dompdf->loadHtml($html);
+ 
+             // Activer la numérotation des pages
+             $options->set('isPhpEnabled', true);
+             $options->set('isHtml5ParserEnabled', true);
+             $options->set('isPhpEnabled', true);
+             $options->set('isHtml5ParserEnabled', true);
+ 
+             // Charger les options dans Dompdf
+             $dompdf->setOptions($options);
+             
+             // Rendre le PDF
+             $dompdf->render();
+             
+             // Envoyer le PDF à la sortie
+     return $dompdf->stream("liste_utilisateurs.pdf");
+ 
+ }
+
     public function create()
     {
-        return view('ajout_diaspora');
+        return view('/ajout_diaspora');
     }
 
     /**
@@ -59,10 +96,11 @@ class DiasporaController extends Controller
             'password' => 'Null',
             'ravip' => $request->ravip,
             'profession' => $request->profession,
-            'statut' => 'Diaspora',
+            'statut' => $request->statut,
+            'categorie' => 'Diaspora',
             'pays' => $request->pays,
             'npi' => $request->npi,
-            'status' => true,
+            'active' => false,
             'photo' => 'Null',
 
 
@@ -110,6 +148,7 @@ class DiasporaController extends Controller
             //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
             'statut' =>    'required|max:255',
+            'categorie' =>    'required|max:255',
             
 
         ]);
@@ -125,6 +164,7 @@ class DiasporaController extends Controller
         $diaspora->email = $request->email;
         $diaspora->profession = $request->profession;
         $diaspora->statut = $request->statut;
+        $diaspora->categorie = $request->categorie;
 
         $diaspora->save();
 
