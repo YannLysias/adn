@@ -118,6 +118,10 @@
                                 <div class="col-lg-3 col-md-4 label">Categorie</div>
                                 <div class="col-lg-9 col-md-8">{{ $diaspora->categorie }}</div>
                               </div>
+                              <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Categories socio-pro</div>
+                                <div class="col-lg-9 col-md-8">{{ $diaspora->fonction }}</div>
+                              </div>
 
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Pays</div>

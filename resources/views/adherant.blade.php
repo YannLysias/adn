@@ -10,6 +10,7 @@
 
     <title>ADN Bénin </title>
 
+    @notifyCss 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -24,6 +25,7 @@
   </head>
 
   <body class="nav-md">
+
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -87,9 +89,11 @@
 
                     
                     <div class="d-flex justify-content-end">
+                      @auth
                       <a href="{{ route('generate.pdf') }}" class="btn btn-primary btn-print">
-                        <i class="fa fa-print"></i> Imprimer
+                          <i class="fa fa-print"></i> Imprimer
                       </a>
+                      @endauth
                       <a href="adherant/create" class="ml-auto">
                         <button type="button" class="btn btn-success">Ajouter</button>
                       </a>
@@ -134,6 +138,8 @@
                       </select>
                     </div><br>
 
+                    
+
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                           <tr>
@@ -144,6 +150,8 @@
                               <th>Téléphone</th>
                               <th>Profession</th>
                               <th>Statut</th>
+                              <th>Type</th>
+                              <th>Date</th>
                               <th>Manipulation</th>
                           </tr>
                       </thead>
@@ -157,6 +165,8 @@
                               <td>{{ $adherant->telephone }}</td>
                               <td>{{ $adherant->profession }}</td>
                               <td>{{ $adherant->statut }}</td>
+                              <td>{{ $adherant->type }}</td>
+                              <td>{{ $adherant->created_at}}</td>
                               <td>
                                   <div class="btn-group">
                                       <form action="{{ route('adherant.destroy', $adherant->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
@@ -217,13 +227,8 @@
     <script src="/build/js/custom.min.js"></script>
 
 
-    <script>
-      // Attachez un gestionnaire d'événements au clic sur le bouton d'impression
-      // document.querySelector('.btn-print').addEventListener('click', function(e) {
-          // e.preventDefault(); // Empêche le comportement par défaut du lien
-          // window.print(); // Déclenche l'impression de la page actuelle
-      // });
-  </script>
+
+
 
     <script>
     var index = 0;                                       
@@ -276,7 +281,6 @@
                         targetSelect.empty();
                         console.log(options, "----------------")
 
-                        
                         $.each(options, function(key, adherant) {
                           targetSelect.append('<tr>' +
                             '<td>' + (index + 1) + '</td>' +
@@ -286,6 +290,8 @@
                             '<td>' + adherant.telephone + '</td>' +
                             '<td>' + adherant.profession + '</td>' +
                             '<td>' + adherant.statut + '</td>' +
+                            '<td>' + adherant.type + '</td>' +
+                            '<td>' + adherant.created_at + '</td>' +
                             
                             '<td>' +
                             '<div class="btn-group">' +
@@ -321,6 +327,8 @@
 }
         });
     </script>
+        <x-notify::notify />
+        @notifyJs
 </body>
 
 </html>

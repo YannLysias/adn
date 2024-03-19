@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('titre',TitreController::class );
     Route::resource('users-profile', adherantController::class)->only(['show']);
     
+    Route::get('/diaspora-pdf', [DiasporaController::class, 'diasporaPDF'])->name('diaspora.pdf');
     Route::get('/generate-pdf', [adherantController::class, 'generatePDF'])->name('generate.pdf');
     Route::resource('diaspora',DiasporaController::class );
     

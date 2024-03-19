@@ -11,6 +11,8 @@
 
     <title>ADN-BENIN</title>
 
+  
+    
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -24,9 +26,11 @@
     <link href="/build/css/custom.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <body class="nav-md">
-    <script>
+
+        
+    {{-- <script>
         // Fonction pour afficher une boîte de dialogue de confirmation avant la soumission du formulaire
         function confirmSubmit() {
             return confirm("Voulez-vous soumettre ce formulaire ?");
@@ -48,7 +52,7 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
 
     <div class="container body">
         <div class="main_container" >
@@ -70,7 +74,7 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <form class="" action="/inscrire" method="post"
-                                enctype="multipart/form-data" novalidate onsubmit="return confirmSubmit();">
+                                enctype="multipart/form-data" novalidate onsubmit="return confirm('Inscription reçue');">
                                 @csrf
 
                                 <div class="field item form-group">
@@ -99,10 +103,11 @@
                                             <option value="Masculin" {{ old('sexe') == 'Masculin' ? 'selected' : '' }}>Masculin</option>
                                             <option value="Feminin" {{ old('sexe') == 'Feminin' ? 'selected' : '' }}>Féminin</option>
                                         </select>
-                                    </div>
-                                    @error('sexe')
+                                        @error('sexe')
                                         <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
+                                    </div>
+                                    
                                 </div>
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Email</label>
@@ -116,16 +121,33 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" type="tel" class='tel' placeholder="Saisissez votre Numéro" name="telephone" required='required' data-validate-length-range="8,20"  value="{{ old('telephone') }}"/>
+                                        <input class="form-control" type="tel" class='tel' placeholder="Saisissez votre Numéro" name="telephone" required='required' value="{{ old('telephone') }}"/>
                                     </div>
                                     @error('telephone')
                                     <div class="d-block text-danger">{{$message}}</div>
                                     @enderror
                                 </div>
                                 <div class="field item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Categories socio-pro<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <select class="form-control forms-control-lg" name="fonction">
+                                            <option value="" disabled selected>Choisir</option>
+                                            <option value="Operateur Economique" {{ old('fonction') == 'Operateur Economique' ? 'selected' : '' }}>Operateur Economique</option>
+                                            <option value="Fonctionnaire d'état " {{ old('fonction') == "Fonctionnaire d'état" ? 'selected' : '' }}>Fonctionnaire d'état</option>
+                                            <option value="Salariés secteur privé" {{ old('fonction') == 'Salariés secteur privé' ? 'selected' : '' }}>Salariés secteur privé</option>
+                                            <option value="Elus" {{ old('sexe') == 'Elus' ? 'selected' : '' }}>Elus</option>
+                                            <option value="Artisans, commerçants" {{ old('fonction') == 'Artisans, commerçants' ? 'selected' : '' }}>Artisans, commerçants</option>
+                                            <option value="Autres" {{ old('fonction') == 'Autres' ? 'selected' : '' }}>Autres</option>
+                                        </select>
+                                    </div>
+                                    @error('fonction')
+                                        <div class="d-block text-danger">{{$message}}</div>
+                                    @enderror
+                                </div>
+                                <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Profession<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control" class='optional' name="profession" placeholder="Saisissez votre Profession" data-validate-length-range="5,15" type="text" value="{{ old('profession') }}" />
+                                        <input class="form-control" class='optional' name="profession" placeholder="Saisissez votre Profession" type="text" value="{{ old('profession') }}" />
                                     </div>
                                     @error('profession')
                                     <div class="d-block text-danger">{{$message}}</div>
@@ -149,7 +171,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" type="number" class='tel'
-                                            name="npi" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro NPI" value="{{ old('npi') }}" />
+                                            name="npi" data-validate-length-range="10,20" placeholder="Saisissez votre Numéro NPI" value="{{ old('npi') }}" />
                                     </div>
                                     @error('npi')
                                     <div class="d-block text-danger">{{$message}}</div>
@@ -159,7 +181,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">RAVIP</label>
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" type="number" class='tel'
-                                            name="ravip" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro RAVIP" value="{{ old('ravip') }}" />
+                                            name="ravip" data-validate-length-range="10,20" placeholder="Saisissez votre Numéro RAVIP" value="{{ old('ravip') }}" />
                                     </div>
                                     @error('ravip')
                                     <div class="d-block text-danger">{{$message}}</div>
@@ -181,7 +203,7 @@
                                     @enderror
                                 </div> --}}
                         
-                                <div class="field item form-group">
+                                {{-- <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Titres</label>
                                     <div class="col-md-6 col-sm-6">
                                     <select id="choix" name="titre_id" class="form-control forms-control-lg">
@@ -196,7 +218,7 @@
                                         @enderror
                                     </select>
                                 </div>
-                                </div>
+                                </div> --}}
                         
                                 <div class="field item form-group">
                                     
@@ -299,10 +321,26 @@
     </div>
     </div>
 
+    <script>
+        // Ecouter la réponse JSON
+        $(document).ready(function() {
+            if(session('success')){
+                // Afficher une boîte de dialogue avec SweetAlert
+                swal({
+                    title: "Inscription Reçu !",
+                    text: "{{ session('success') }}",
+                    icon: "success",
+                    button: "OK"
+                });
+            }
+        });
+    </script>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="/vendors/validator/multifield.js"></script>
     <script src="/vendors/validator/validator.js"></script>
+    
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -332,6 +370,45 @@
             eye.style.display = "block";
         }
 
+    }
+    </script>
+
+    <script>
+        function confirmerInscription() {
+            // Vérifiez ici si les champs obligatoires sont remplis
+            var nom = document.getElementById('nom').value;
+            var prenom = document.getElementById('prenom').value;
+            var sexe = document.getElementById('sexe').value;
+            var telephone = document.getElementById('telephone').value;
+            var profession = document.getElementById('profession').value;
+            var statut = document.getElementById('statut').value;
+            var fonction = document.getElementById('fonction').value;
+            var type = document.getElementById('type').value;
+            // Ajoutez d'autres vérifications si nécessaire
+
+            // Si les champs obligatoires ne sont pas remplis, ne pas afficher la boîte de dialogue
+            if (nom === '' || prenom === '' sexe === '' || telephone === '' profession === '' || statut === ''fonction === '' || type === '') {
+                return true; // Le formulaire sera soumis normalement
+            }
+
+            // Si les champs obligatoires sont remplis, afficher la boîte de dialogue de confirmation
+            return confirm('Inscription reçue ?');
+        }
+    </script>
+    <script>
+    function confirmerInscription() {
+        // Vérifiez ici si les champs obligatoires sont remplis
+        var nom = document.getElementById('nom').value;
+        var prenom = document.getElementById('prenom').value;
+        // Ajoutez d'autres vérifications si nécessaire
+
+        // Si les champs obligatoires ne sont pas remplis, ne pas afficher la boîte de dialogue
+        if (nom === '' || prenom === '') {
+            return true; // Le formulaire sera soumis normalement
+        }
+
+        // Si les champs obligatoires sont remplis, afficher la boîte de dialogue de confirmation
+        return confirm('Inscription reçue ?');
     }
     </script>
 
@@ -431,7 +508,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="/build/js/custom.min.js"></script>
-
+    
 </body>
 
 </html>

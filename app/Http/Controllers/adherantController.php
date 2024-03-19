@@ -57,37 +57,42 @@ class adherantController extends Controller
 
     public function generatePDF()
     {
-            $options = new Options();
-            $options->set('isHtml5ParserEnabled', true);
-            
-            $dompdf = new Dompdf($options);
-            $dompdf->setBasePath(public_path());
-            // Récupérez les données des utilisateurs
-            $adherants = User::all();
-
-            // Générez le contenu HTML du tableau
-            $html = view('pdf', compact('adherants'))->render();
-
-            
-            // Chargez le contenu HTML dans Dompdf
-            $dompdf->loadHtml($html);
-
-            // Activer la numérotation des pages
-            $options->set('isPhpEnabled', true);
-            $options->set('isHtml5ParserEnabled', true);
-            $options->set('isPhpEnabled', true);
-            $options->set('isHtml5ParserEnabled', true);
-
-            // Charger les options dans Dompdf
-            $dompdf->setOptions($options);
-            
-            // Rendre le PDF
-            $dompdf->render();
-            
-            // Envoyer le PDF à la sortie
-    return $dompdf->stream("liste_utilisateurs.pdf");
-
-}
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        
+        $dompdf = new Dompdf($options);
+        $dompdf->setBasePath(public_path());
+        
+        // Récupérez l'utilisateur connecté
+        $user = Auth::user();
+    
+        // Définissez une variable pour stocker les adhérents
+        $adherants = null;
+    
+        // Vérifiez le type d'utilisateur
+        if ($user->type === 'Coordonnateur') {
+            // Si l'utilisateur est un coordonnateur, récupérez les adhérents de son quartier
+            $adherants = User::where('quartier_id', $user->quartier_id)
+                             ->where('type', 'Adhérent')
+                             ->get();
+        } elseif ($user->type === 'Administrateur') {
+            // Si l'utilisateur est un administrateur, récupérez tous les adhérents
+            $adherants = User::where('type', 'Adhérent')->get();
+        }
+    
+        // Générez le contenu HTML du tableau
+        $html = view('pdf', compact('adherants'))->render();
+        
+        // Chargez le contenu HTML dans Dompdf
+        $dompdf->loadHtml($html);
+        
+        // Définissez les options de rendu et générez le PDF
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        
+        // Envoyez le PDF à la sortie
+        return $dompdf->stream("liste_utilisateurs.pdf");
+    }
     
    
 
@@ -181,6 +186,7 @@ class adherantController extends Controller
             //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
             'statut' =>    'required|max:255',
+            'fonction' =>    'required|max:255',
             //'npi' => 'required|max:255',
             //'photo' => 'required|mimes:jpg,png,jpeg',
             //'titre_id' => 'required|max:255',
@@ -193,12 +199,15 @@ class adherantController extends Controller
         ]);    
 
         $quartierId = $request->quartier_id;
-        $users = User::where('quartier_id', $quartierId)->where('type', "Coordonnateur")->get();
+        if($request->type == "Coordonnateur"){ 
+            $users = User::where('quartier_id', $quartierId)->where('type', "Coordonnateur")->get();
 
         if ($users->count() > 0) {
             return back()->withErrors(['quartier_id' => "Un coordonnateur existe déjà dans ce quartier"]);
         }
 
+        }
+        
         if ($request->hasFile('photo')) {
             // Valider et stocker la photo
             $path_photo = $request->file('photo')->store('public/photos');
@@ -251,6 +260,7 @@ class adherantController extends Controller
             'npi' => $request->npi,
             'photo' => $request->has('photo') ? $path_photo_convert_to_table[2] : null,
             'statut' => $request->statut,
+            'fonction' => $request->fonction,
             'active' => false,
             'titre_id' => $titre ? $titre->id : null,
             'departement_id' => $departement ? $departement->id : null,
@@ -272,7 +282,15 @@ class adherantController extends Controller
             ]));
         }        
 
-        return redirect()->route('adherant.index')->with('success', 'Formulaire soumis avec succès!');
+        // return redirect('adherant')->with('message', 'Formulaire soumis avec succès!');
+      
+            notify()->success('Votre inscription a été Reçu avec succès', 'Success');
+ 
+    
+        // Redirigez l'utilisateur
+        return redirect('adherant');
+     
+
     }
 
     /**
@@ -356,6 +374,7 @@ class adherantController extends Controller
         $adherant->statut = $request->statut;
         $adherant->photo = $request->photo;
         $adherant->titre_id = $titre->id;
+        $adherant->fonction = $request->fonction;
         $adherant->quartier_id = $quartier->id;
         $adherant->departement_id = $departement->id;
         $adherant->arrondissement_id = $arrondissement->id;

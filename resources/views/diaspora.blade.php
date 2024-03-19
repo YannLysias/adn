@@ -90,7 +90,7 @@
                           <button type="button" class="btn btn-success">Ajouter</button>
                       </a> --}}
                       <div class="d-flex justify-content-end">
-                      <a href="{{ route('generate.pdf') }}" class="btn btn-primary btn-print">
+                      <a href="{{ route('diaspora.pdf') }}" class="btn btn-primary btn-print">
                         <i class="fa fa-print"></i> Imprimer
                       </a>
                     </div>

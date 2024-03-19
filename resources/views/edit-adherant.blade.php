@@ -101,6 +101,23 @@
             @enderror
         </div>
         <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Categories socio-pro<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+            <select id="" value="{{$adherant->fonction}}" name="sexe" class="form-control forms-control-lg">
+                <option value="" disabled selected>Choisir</option>
+                <option value="Operateur Economique" @selected($adherant->fonction == 'Operateur Economique' ? true : false)>M</option>
+                <option value="Fonctionnaire d'état" @selected($adherant->fonction == 'Fonctionnaire d état' ? true : false)>F</option>
+                <option value="Salariés secteur privé" @selected($adherant->fonction == 'Salariés secteur privé' ? true : false)>M</option>
+                <option value="Elus" @selected($adherant->fonction == 'Elus' ? true : false)>F</option>
+                <option value="Artisans, commerçants" @selected($adherant->fonction == 'Artisans, commerçants' ? true : false)>M</option>
+                <option value="Autres" @selected($adherant->fonction == 'Autres' ? true : false)>F</option>
+            </select>
+            </div>
+            @error('sexe')
+            <div class="d-block text-danger">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Email</label>
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" value="{{$adherant->email}}" name="email" class='email' type="email" />

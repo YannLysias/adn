@@ -85,18 +85,19 @@ class InscrireController extends Controller
             'nom' => 'required|max:255',
             'prenom' => 'required|max:255',
             'sexe' => 'required|max:255',
-            'telephone' => 'required|max:255',
-            //'email' => 'email|unique:users,email|max:255',
+            'telephone' => 'required|unique:users,telephone|max:255',
+            'fonction' => 'required|max:255',
+            'email' => 'nullable|email|unique:users,email',
             //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
             'statut'    => 'required|max:255',
             //'npi' => 'required|max:255',
             //'photo' => 'mimes:jpg,png,jpeg',
             //'pays' => 'required|max:255',
-            'commune_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
-            'departement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
-            'arrondissement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
-            'quartier_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'commune_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'departement_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'arrondissement_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'quartier_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
 
             // 'quartier_id' => 'required|max:255',
             // 'arrondissement_id' => 'required|max:255',
@@ -135,6 +136,7 @@ class InscrireController extends Controller
             'profession' => $request->profession,
             'statut' => $request->statut,
             'pays' => $request->pays,
+            'fonction' => $request->fonction,
             'npi' => $request->npi,
             'active' => true,
             'photo' => 'Null',
@@ -146,7 +148,7 @@ class InscrireController extends Controller
 
         ]);
 
-        return redirect()->route('welcome');
+        return redirect()->route('welcome')->with('success', 'Votre inscription a été Reçu avec succès');
     }
 
     /**

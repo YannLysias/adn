@@ -75,19 +75,8 @@
                                             <h2 class="bg-danger text-dark mb-5">Action pour le Développement National (ADN)  </h2>
                                             <ul class="nav navbar-right panel_toolbox">
                                                 <ul class="nav navbar-right panel_toolbox">
-                                                    @if (Auth::user()->type !== 'Administrateur')
-                                                        <li>
-                                                            <h3><strong>Quartier:</strong> {{ Auth::user()->quartier->libelle }}</h3>
-                                                        </li>
-                                                        <li>
-                                                            <h3><strong>Coordonnateur:</strong> {{ Auth::user()->nom . ' ' . Auth::user()->prenom }}</h3>
-                                                        </li>
-                                                    @else
-                                                        <h3>Administrateur</h3>
-                                                        <li>
-                                                            <h3><strong></strong> {{ Auth::user()->nom . ' ' . Auth::user()->prenom }}</h3>
-                                                        </li>
-                                                    @endif
+                                                   
+                                                  <h3>Liste de la Diaspora</h3>
                                                 </ul>
                                             </ul>
                                             <div class="clearfix"></div>

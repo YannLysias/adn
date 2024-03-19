@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+ 
+use ProtoneMedia\Splade\Facades\Toast;
 use App\Models\User;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -25,7 +27,7 @@ class DiasporaController extends Controller
      * Show the form for creating a new resource.
      */
 
-     public function generatePDF()
+     public function diasporaPDF()
      {
              $options = new Options();
              $options->set('isHtml5ParserEnabled', true);
@@ -33,10 +35,10 @@ class DiasporaController extends Controller
              $dompdf = new Dompdf($options);
              $dompdf->setBasePath(public_path());
              // Récupérez les données des utilisateurs
-             $adherants = User::all();
+             $adherants = User::where('categorie', 'Diaspora')->get();
  
              // Générez le contenu HTML du tableau
-             $html = view('pdf', compact('adherants'))->render();
+             $html = view('pdfdiaspo', compact('adherants'))->render();
  
              
              // Chargez le contenu HTML dans Dompdf
@@ -55,7 +57,7 @@ class DiasporaController extends Controller
              $dompdf->render();
              
              // Envoyer le PDF à la sortie
-     return $dompdf->stream("liste_utilisateurs.pdf");
+     return $dompdf->stream("liste_diaspora.pdf");
  
  }
 
@@ -74,11 +76,12 @@ class DiasporaController extends Controller
             'nom' => 'required|max:255',
             'prenom' => 'required|max:255',
             'sexe' => 'required|max:255',
-            'telephone' => 'required|max:255',
+            'telephone' => 'required|unique:users,telephone|max:255',
+            'fonction' => 'required|max:255',
+            'email' => 'nullable|email|unique:users,email',
             //'email' => 'email|unique:users,email|max:255',
             //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
-            
             //'npi' => 'required|max:255',
             //'photo' => 'mimes:jpg,png,jpeg',
             //'pays' => 'required|max:255',
@@ -98,6 +101,7 @@ class DiasporaController extends Controller
             'profession' => $request->profession,
             'statut' => $request->statut,
             'categorie' => 'Diaspora',
+            'fonction' => $request->fonction,
             'pays' => $request->pays,
             'npi' => $request->npi,
             'active' => false,
@@ -106,7 +110,14 @@ class DiasporaController extends Controller
 
         ]);
 
-        return redirect()->route('welcome');
+// Toast::title('Whoops!')
+//     ->message('No space left')
+//     ->warning()
+//     ->leftTop()
+//     ->backdrop()
+//     ->autoDismiss(15);
+        return redirect()->route('welcome')->with('success', 'Votre inscription a été Reçu avec succès');
+
     }
 
     /**
@@ -147,6 +158,7 @@ class DiasporaController extends Controller
             //'email' => 'required|email|unique:users,email',
             //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
+            'fonction' => 'required|max:255',
             'statut' =>    'required|max:255',
             'categorie' =>    'required|max:255',
             
@@ -164,6 +176,7 @@ class DiasporaController extends Controller
         $diaspora->email = $request->email;
         $diaspora->profession = $request->profession;
         $diaspora->statut = $request->statut;
+        $diaspora->fonction = $request->fonction;
         $diaspora->categorie = $request->categorie;
 
         $diaspora->save();

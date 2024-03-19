@@ -65,7 +65,7 @@
                 <div class="x_panel">
                     <div class="max-w-[100px]">
 
-    <form id="formulaire" action="/adherant" method="post" enctype="multipart/form-data" novalidate>
+    <form id="formulaire" action="/adherant" method="post" onsubmit="return confirm('Inscription reçue ');" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Nom<span class="required">*</span></label>
@@ -117,9 +117,26 @@
             @enderror
         </div>
         <div class="field item form-group">
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Categories socio-pro<span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6">
+                <select class="form-control forms-control-lg" name="fonction">
+                    <option value="" disabled selected>Choisir</option>
+                    <option value="Operateur Economique" {{ old('fonction') == 'Operateur Economique' ? 'selected' : '' }}>Operateur Economique</option>
+                    <option value="Fonctionnaire d'état " {{ old('fonction') == "Fonctionnaire d'état" ? 'selected' : '' }}>Fonctionnaire d'état</option>
+                    <option value="Salariés secteur privé" {{ old('fonction') == 'Salariés secteur privé' ? 'selected' : '' }}>Salariés secteur privé</option>
+                    <option value="Elus" {{ old('sexe') == 'Elus' ? 'selected' : '' }}>Elus</option>
+                    <option value="Artisans, commerçants" {{ old('fonction') == 'Artisans, commerçants' ? 'selected' : '' }}>Artisans, commerçants</option>
+                    <option value="Autres" {{ old('fonction') == 'Autres' ? 'selected' : '' }}>Autres</option>
+                </select>
+            </div>
+            @error('fonction')
+                <div class="d-block text-danger">{{$message}}</div>
+            @enderror
+        </div>
+        <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Profession<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" class='optional' name="profession" placeholder="Saisissez votre Profession" data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}" />
+                <input class="form-control" class='optional' name="profession" placeholder="Saisissez votre Profession" data-validate-length-range="5,15" type="text" value="{{ old('profession') }}" />
             </div>
             @error('profession')
             <div class="d-block text-danger">{{$message}}</div>

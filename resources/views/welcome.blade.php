@@ -8,7 +8,7 @@
   <title>ADN-BENIN</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+  @notifyCss
   <!-- Favicons -->
   <link rel="icon" href="assets/img/icon.png">
 
@@ -27,6 +27,7 @@
   <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
   <link href="/assets/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
@@ -48,7 +49,14 @@
 <body>
 
   @include('layouts.header')
-
+  
+@if (session('success'))
+    <script>
+        window.onload = function() {
+            alert('{{ session('success') }}');
+        }
+    </script>
+@endif
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
@@ -179,7 +187,7 @@
       <div class="container" data-aos="fade-up">
           <div class="row" data-aos="zoom-in" data-aos-delay="100">
               @foreach($departements as $departement)
-              <div class="col-md-3"> <!-- Utilisation de col-md-4 pour afficher 3 colonnes par ligne sur les écrans de taille moyenne -->
+              <div class="col-md-3">
                   <div class="card">
                       <div class="card-body">
                           <h5 class="card-title">{{ $departement->libelle }}</h5>
@@ -191,29 +199,38 @@
           </div>
       </div>
   </section>
+  
   <style>
     .card {
-    margin-bottom: 20px;
-    border: 1px solid #dee2e6;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .font-bold {
-        font-weight: 800
-      }
-      .card-body {
-          padding: 20px;
-      }
+        margin-bottom: 20px;
+        border: 1px solid #0b5e1e;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease; /* Ajout d'une transition fluide pour l'effet de survol */
+    }
 
-      .card-title {
-          font-size: 18px;
-          font-weight: bold;
-      }
+    .card:hover {
+        background-color: #31383f; /* Couleur grise au survol */
+        transform: translateY(-5px); /* Légère translation vers le haut pour un effet de flottement */
+    }
 
-      .card-text {
-          font-size: 16px;
-      }
-  </style>
+    .font-bold {
+        font-weight: 800;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 16px;
+    }
+</style>
 
 
   </main><!-- End #main -->
@@ -250,6 +267,8 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <x-notify::notify />
+  @notifyJs
 
 </body>
 
