@@ -282,13 +282,12 @@ class adherantController extends Controller
             ]));
         }        
 
-        // return redirect('adherant')->with('message', 'Formulaire soumis avec succès!');
       
-            notify()->success('Votre inscription a été Reçu avec succès', 'Success');
+            //notify()->success('Votre inscription a été Reçu avec succès', 'Success');
  
-    
-        // Redirigez l'utilisateur
-        return redirect('adherant');
+        return redirect('adherant')->with('success', 'Votre inscription a été Reçu avec succès');
+       
+        //return redirect('adherant');
      
 
     }

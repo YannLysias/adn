@@ -74,7 +74,7 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <form class="" action="/inscrire" method="post"
-                                enctype="multipart/form-data" novalidate onsubmit="return confirm('Inscription reçue');">
+                                enctype="multipart/form-data" novalidate>
                                 @csrf
 
                                 <div class="field item form-group">

@@ -8,7 +8,7 @@
   <title>ADN-BENIN</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-  @notifyCss
+ 
   <!-- Favicons -->
   <link rel="icon" href="assets/img/icon.png">
 
@@ -267,8 +267,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <x-notify::notify />
-  @notifyJs
 
 </body>
 

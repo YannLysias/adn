@@ -70,7 +70,7 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <form class="" action="/diaspora" method="post"
-                                enctype="multipart/form-data" novalidate onsubmit="return confirmSubmit();">
+                                enctype="multipart/form-data" novalidate >
                                 @csrf
 
                                 <div class="field item form-group">

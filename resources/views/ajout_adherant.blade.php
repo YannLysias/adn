@@ -65,7 +65,7 @@
                 <div class="x_panel">
                     <div class="max-w-[100px]">
 
-    <form id="formulaire" action="/adherant" method="post" onsubmit="return confirm('Inscription reçue ');" enctype="multipart/form-data" novalidate>
+    <form id="formulaire" action="/adherant" method="post" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Nom<span class="required">*</span></label>

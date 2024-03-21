@@ -10,7 +10,6 @@
 
     <title>ADN Bénin </title>
 
-    @notifyCss 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -48,7 +47,13 @@
             @include('layouts.sidebar')
 
         <!-- top navigation -->
-       
+        @if (session('success'))
+        <script>
+            window.onload = function() {
+                alert('{{ session('success') }}');
+            }
+        </script>
+    @endif
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -327,8 +332,7 @@
 }
         });
     </script>
-        <x-notify::notify />
-        @notifyJs
+
 </body>
 
 </html>
