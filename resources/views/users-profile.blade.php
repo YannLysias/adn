@@ -71,7 +71,7 @@
                           <img src="/storage/photos/{{ $user->photo }}" style="width: 80px; height: 80px;" alt="Profile" class="rounded-circle profile-picture">
                             @else
                           <!-- Afficher une image par défaut ou un avatar -->
-                          <img src="/storage/photos/images.png" style="width: 80px; height: 80px;" alt="Default Avatar" class="rounded-circle profile-picture">
+                          <img src="/img/images.png" style="width: 80px; height: 80px;" alt="Default Avatar" class="rounded-circle profile-picture">
                             @endif
                           <h2>{{ $user->nom }} {{ $user->prenom }}</h2>
                           <h3>{{ $user->type }}</h3>

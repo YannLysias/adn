@@ -2,7 +2,7 @@
 
 <div class="navbar nav_title" style="border: 0;">
   <a href="/dashboard" class="site_title d-flex align-items-center">
-      <img src="assets/img/icone.png" alt="Logo ADN" class="logo mr-2">
+      <img src="/assets/img/icone.png" alt="Logo ADN" class="logo mr-2">
       <span>ADN</span>
   </a>
 </div> <br><br>

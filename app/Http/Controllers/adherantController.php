@@ -212,8 +212,6 @@ class adherantController extends Controller
             // Valider et stocker la photo
             $path_photo = $request->file('photo')->store('public/photos');
             $path_photo_convert_to_table = explode('/', $path_photo);
-        } else {
-            // Aucun fichier photo n'a été soumis dans la requête, vous pouvez choisir de ne rien faire ou d'effectuer d'autres actions selon vos besoins
         }
         // $path_photo = Storage::putFile('public/photos', $request->photo);
         // $path_photo_convert_to_table = explode('/', $path_photo);
@@ -339,7 +337,7 @@ class adherantController extends Controller
             'profession' => 'required|max:255',
             'statut' =>    'required|max:255',
             //'npi' => 'required|max:255',
-            //'photo' => 'required|mimes:jpg,png,jpeg',
+            'photo' => 'nullable|mimes:jpg,png,jpeg',
             //'titre_id' => 'required|max:255',
             'quartier_id' => 'required|max:255',
             'arrondissement_id' => 'required|max:255',
@@ -350,12 +348,30 @@ class adherantController extends Controller
         
         $adherant = User::where('id', (int) $id)->first();
 
-        $titre = Titre::findOrFail(intval($request->titre_id));
+
+        $titre = Titre::find(intval($request->titre_id));
         
         $departement = Departement::findOrFail(intval($request->departement_id));
         $commune = Commune::findOrFail(intval($request->commune_id));
         $arrondissement = Arrondissement::findOrFail(intval($request->arrondissement_id));
         $quartier = Quartier::findOrFail(intval($request->quartier_id));
+
+        if ($request->hasFile('photo')) {
+            // Valider et stocker la photo
+            $path_photo = $request->file('photo')->store('public/photos');
+            $path_photo_convert_to_table = explode('/', $path_photo);
+  
+
+            $existing_photo_path = 'public/photos/' . $adherant->photo; 
+            if (Storage::exists($existing_photo_path)) {
+                Storage::delete($existing_photo_path);
+            }
+
+            $adherant->photo = $request->has('photo') ? $path_photo_convert_to_table[2] : null;
+
+        }
+
+        
         
         $adherant->nom = $request->nom;
         $adherant->prenom = $request->prenom;
@@ -371,8 +387,7 @@ class adherantController extends Controller
         $adherant->profession = $request->profession;
         $adherant->npi = $request->npi;
         $adherant->statut = $request->statut;
-        $adherant->photo = $request->photo;
-        $adherant->titre_id = $titre->id;
+        $adherant->titre_id = $titre ? $titre->id : null;
         $adherant->fonction = $request->fonction;
         $adherant->quartier_id = $quartier->id;
         $adherant->departement_id = $departement->id;

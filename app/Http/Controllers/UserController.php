@@ -27,7 +27,7 @@ class UserController extends Controller
             'email' => 'gkpedjo@gmail.com',
             'type' => 'Administrateur',
             'profession' => 'Informaticien',
-            'photo' => 'yann.jpg',
+            'photo' => 'images.png',
             'npi' => '12324546',
             'ravip' => '1234565',
             'password' => 'original22',
