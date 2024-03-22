@@ -61,8 +61,6 @@ Route::middleware('auth')->group(function () {
     // Route::post('/inscrire', [InscrireController::class, 'store'])->name('inscription.store');
     // Route::get('/welcome', [InscrireController::class, 'index'])->name('welcome');
     
-   
-
     Route::resource('inscrire', InscrireController::class)->only([
         'index', 'store', 'create', 'update', 'edit', 'search'
     ]);

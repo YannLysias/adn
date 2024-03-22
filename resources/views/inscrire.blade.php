@@ -55,24 +55,30 @@
     @endif --}}
 
     <div class="container body">
+       
         <div class="main_container" >
             <div role="main">
                 <div class="page-title text-white p-3 mb-4" style="background-color: #0b5e1e;">
-                    <div class="container" >
-                        <div class="row justify-content-center">
-                            <div class="col-md-6 text-center">
-                                <h3>S'inscrire</h3>
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <a href="javascript:history.back()" class="btn btn-secondary float-end">
+                                    <i class="bi bi-arrow-left"></i> Retour
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             <div class="clearfix"></div>
            
             <div class="row bg-blue-300">
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
+                        <div class="col-md-12 text-center">
+                            <h3 class="mt-3 mt-md-0">S'inscrire</h3>
+                        </div>
                         <div class="x_content">
+                            
                             <form class="" action="/inscrire" method="post"
                                 enctype="multipart/form-data" novalidate>
                                 @csrf
@@ -309,13 +315,10 @@
     </div>
     <!-- page content -->
     <!-- footer content -->
-    <footer style="background-color: #0b5e1e; color: #fff;">
-        <div class="text-center">
-            <div class="copyright" style="text-align: center; padding-right: 300px;">
-              &copy; 2024 Action pour le Développement National <strong></strong>
-            </div>
-          </div>
-        <div class="clearfix"></div>
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="m-0">&copy; 2024 Action pour le Développement National</p>
+        </div>
     </footer>
     <!-- /footer content -->
     </div>

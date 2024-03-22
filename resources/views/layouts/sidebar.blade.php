@@ -65,7 +65,7 @@
         <a data-toggle="tooltip" data-placement="top" title="Lock">
           <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
         </a>
-        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+        <a data-toggle="tooltip" data-placement="top" title="Logout" href="">
           <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
         </a>
       </div>
@@ -89,7 +89,7 @@
               @if(Auth::user()->photo)
               <img src="/storage/photos/{{ Auth::user()->photo }}" alt="Photo de profil">
                 @else
-                <img src="/storage/photos/images.png" alt="Photo de profil">
+                <img src="/img/images.png" alt="Photo de profil">
                 @endif
               <div class="user-details">
                 <h6>{{ Auth::user()->prenom }}</h6>
