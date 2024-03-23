@@ -77,7 +77,7 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Prenom<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Prénom(s)<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" class='optional' placeholder="La première lettre en majuscule" name="prenom" data-validate-length-range="5,15" type="text" value="{{ old('prenom') }}"/>
             </div>
@@ -108,7 +108,7 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Téléphone<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" type="tel" class='tel' placeholder="Saisissez votre Numéro" name="telephone" required='required' data-validate-length-range="8,20"  value="{{ old('telephone') }}"/>
             </div>
@@ -117,7 +117,7 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Categories socio-pro<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Catégories socio-pro<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
                 <select class="form-control forms-control-lg" name="fonction">
                     <option value="" disabled selected>Choisir</option>
@@ -226,7 +226,7 @@
 
         <div class="field item form-group">
             
-            <label class="col-form-label col-md-3 col-sm-3 label-align">Departement<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Departements<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="departement_id" name="departement_id" class="form-control forms-control-lg" required>
                 <option value=""  disabled selected>Choisissez un departement
@@ -244,7 +244,7 @@
         </div>
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Commune<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Communes<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="commune_id" value="{{ old('commune_id') }}" name="commune_id" class="form-control forms-control-lg" required>
                 <option value="" disabled selected>Choisissez une commune
@@ -259,7 +259,7 @@
             </div>
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Arrondissement<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Arrondissements<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="arrondissement_id" value="{{ old('arrondissement_id') }}" name="arrondissement_id" class="form-control forms-control-lg" required>
                 <option value="" disabled selected>Choisissez un Arrondissement
@@ -275,7 +275,7 @@
         </div>
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Quartier<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Quartiers<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="quartier_id" value="{{ old('quartier_id') }}" name="quartier_id" class="form-control forms-control-lg" required>
                 <option value="" disabled selected>Choisissez un Quartier

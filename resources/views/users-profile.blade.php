@@ -91,7 +91,7 @@
                               <h5 class="card-title">Profile Details</h5>
             
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 label ">Nom et Prénom</div>
+                                <div class="col-lg-3 col-md-4 label ">Nom et Prénom(s)</div>
                                 <div class="col-lg-9 col-md-8">{{ $user->nom }} {{ $user->prenom }}</div>
                               </div>
             
@@ -121,7 +121,7 @@
                               </div>
 
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Categories socio-pro</div>
+                                <div class="col-lg-3 col-md-4 label">Catégories socio-pro</div>
                                 <div class="col-lg-9 col-md-8">{{ $user->fonction }}</div>
                               </div>
                               
@@ -139,7 +139,7 @@
                               </div>
                               
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Departement</div>
+                                <div class="col-lg-3 col-md-4 label">Département</div>
                                 @if($user->quartier && $user->quartier->arrondissement && $user->quartier->arrondissement->commune && $user->quartier->arrondissement->commune->departement)
                                     <div class="col-lg-9 col-md-8">{{ $user->quartier->arrondissement->commune->departement->libelle }}</div>
                                 @else

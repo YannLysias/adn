@@ -79,7 +79,7 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Prenom<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Prénom(s)<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" value="{{$diaspora->prenom}}" class='optional' name="prenom" data-validate-length-range="5,15" type="text" />
             </div>
@@ -110,7 +110,7 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">Telephone<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Téléphone<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" value="{{$diaspora->telephone}}" type="tel" class='tel' name="telephone" required='required' data-validate-length-range="8,20" />
             </div>
@@ -142,7 +142,7 @@
             @enderror
         </div>
         <div class="field item form-group">
-            <label class="col-form-label col-md-3 col-sm-3  label-align">type<span class="required">*</span></label>
+            <label class="col-form-label col-md-3 col-sm-3  label-align">Type<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="choix" value="{{$diaspora->type}}" name="type" class="form-control forms-control-lg">
                 <option value="Adhérent" @selected($diaspora->type == 'Adhérent' ? true : false)>Adhérent</option>

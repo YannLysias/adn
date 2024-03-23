@@ -101,7 +101,7 @@
                         <tr>
 
                           <th>Nom</th>
-                          <th>Prénon</th>
+                          <th>Prénom(s)</th>
                           <th>Sexe</th>
                           <th>Téléphone</th>
                           <th>statut</th>

@@ -90,7 +90,7 @@
                                     @enderror
                                 </div>
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Prenom<span
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Prénom(s)<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" class='optional' name="prenom" required="required"
@@ -176,7 +176,7 @@
                                     </div>
                                 </div>
                                 <div class="field item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Categories socio-pro<span class="required">*</span></label>
+                                    <label class="col-form-label col-md-3 col-sm-3  label-align">Catégories socio-pro<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
                                         <select class="form-control forms-control-lg" name="fonction">
                                             <option value="" disabled selected>Choisir</option>

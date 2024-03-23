@@ -86,7 +86,7 @@
                               <h5 class="card-title">Profile Details</h5>
             
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 label ">Nom et Prénom</div>
+                                <div class="col-lg-3 col-md-4 label ">Nom et Prénom(s)</div>
                                 <div class="col-lg-9 col-md-8">{{ $diaspora->nom }} {{ $diaspora->prenom }}</div>
                               </div>
             
@@ -124,7 +124,7 @@
                                 <div class="col-lg-9 col-md-8">{{ $diaspora->categorie }}</div>
                               </div>
                               <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Categories socio-pro</div>
+                                <div class="col-lg-3 col-md-4 label">Catégories socio-pro</div>
                                 <div class="col-lg-9 col-md-8">{{ $diaspora->fonction }}</div>
                               </div>
 

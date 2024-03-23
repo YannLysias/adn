@@ -209,11 +209,6 @@
         transition: all 0.3s ease; /* Ajout d'une transition fluide pour l'effet de survol */
     }
 
-    .card:hover {
-        background-color: #31383f; /* Couleur grise au survol */
-        transform: translateY(-5px); /* Légère translation vers le haut pour un effet de flottement */
-    }
-
     .font-bold {
         font-weight: 800;
     }
