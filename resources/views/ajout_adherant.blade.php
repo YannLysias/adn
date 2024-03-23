@@ -124,7 +124,7 @@
                     <option value="Operateur Economique" {{ old('fonction') == 'Operateur Economique' ? 'selected' : '' }}>Operateur Economique</option>
                     <option value="Fonctionnaire d'état " {{ old('fonction') == "Fonctionnaire d'état" ? 'selected' : '' }}>Fonctionnaire d'état</option>
                     <option value="Salariés secteur privé" {{ old('fonction') == 'Salariés secteur privé' ? 'selected' : '' }}>Salariés secteur privé</option>
-                    <option value="Elus" {{ old('sexe') == 'Elus' ? 'selected' : '' }}>Elus</option>
+                    <option value="Elus" {{ old('fonction') == 'Elus' ? 'selected' : '' }}>Elus</option>
                     <option value="Artisans, commerçants" {{ old('fonction') == 'Artisans, commerçants' ? 'selected' : '' }}>Artisans, commerçants</option>
                     <option value="Autres" {{ old('fonction') == 'Autres' ? 'selected' : '' }}>Autres</option>
                 </select>
@@ -147,8 +147,8 @@
             <div class="col-md-6 col-sm-6">
                 <select id="choix" class="form-control forms-control-lg" name="statut" required>
                     <option value="" disabled selected>Choisir</option>
-                    <option value="Au Chômage" {{ old('statut') == 'Au Chômage' ? 'selected' : '' }}>Au Chômage</option>
-                    <option value="En Activiter" {{ old('statut') == 'En Activiter' ? 'selected' : '' }}>En Activité</option>
+                    <option value="Au chômage" {{ old('statut') == 'Au chômage' ? 'selected' : '' }}>Au Chômage</option>
+                    <option value="En activité" {{ old('statut') == 'En activité' ? 'selected' : '' }}>En Activité</option>
                 </select>
                 @error('statut')
                     <div class="d-block text-danger">{{ $message }}</div>
@@ -307,7 +307,7 @@
     <div class="form-group">
         <div class="col-md-6 offset-md-3">
             <button type='submit' class="btn btn-primary">Soumettre</button>
-            <button type='reset' class="btn btn-success">Annuler</button>
+            
         </div>
     </div>
     </div>

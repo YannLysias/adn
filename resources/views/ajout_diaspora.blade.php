@@ -167,8 +167,8 @@
                                     <div class="col-md-6 col-sm-6">
                                         <select id="choix" class="form-control forms-control-lg" name="statut" required>
                                             <option value="" disabled selected>Choisir</option>
-                                            <option value="Au Chômage" {{ old('statut') == 'Au Chômage' ? 'selected' : '' }}>Au Chômage</option>
-                                            <option value="En Activiter" {{ old('statut') == 'En Activiter' ? 'selected' : '' }}>En Activité</option>
+                                            <option value="Au chômage" {{ old('statut') == 'Au chômage' ? 'selected' : '' }}>Au chômage</option>
+                                            <option value="En activité" {{ old('statut') == 'En activité' ? 'selected' : '' }}>En activité</option>
                                         </select>
                                         @error('statut')
                                             <div class="d-block text-danger">{{ $message }}</div>
@@ -197,7 +197,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-6 mt-sm-4"> <!-- Ajoutez la classe mt-sm-3 ici -->
                                             <button type='submit' class="btn btn-primary">Soumettre</button>
-                                            <button type='reset' class="btn btn-danger">Annuler</button>
+                                            
                                         </div>
                                     </div>
                                 </div>

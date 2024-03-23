@@ -133,7 +133,8 @@
             <select id="choix" value="{{$diaspora->statut}}" name="statut" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisir</option>
                 
-                <option value="Diaspora" @selected($diaspora->statut == 'Diaspora' ? true : false)>Diaspora</option>
+                <option value="Au chômage" @selected($diaspora->statut == 'Au chômage' ? true : false)>Au chômage</option>
+                <option value="En activité" @selected($diaspora->statut == 'En activité' ? true : false)>En activité</option>
             </select>
         </div>
             @error('statut')
@@ -156,24 +157,24 @@
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" value="{{$diaspora->pays}}" class='optional' name="pays" data-validate-length-range="5,15" type="text" />
             </div>
-            @error('profession')
+            @error('pays')
             <div class="d-block text-danger">{{$message}}</div>
             @enderror
         </div>
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Categories socio-pro<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
-            <select id="" value="{{$adherant->fonction}}" name="sexe" class="form-control forms-control-lg">
+            <select id="" value="{{$diaspora->fonction}}" name="fonction" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisir</option>
-                <option value="Operateur Economique" @selected($adherant->fonction == 'Operateur Economique' ? true : false)>M</option>
-                <option value="Fonctionnaire d'état" @selected($adherant->fonction == 'Fonctionnaire d état' ? true : false)>F</option>
-                <option value="Salariés secteur privé" @selected($adherant->fonction == 'Salariés secteur privé' ? true : false)>M</option>
-                <option value="Elus" @selected($adherant->fonction == 'Elus' ? true : false)>F</option>
-                <option value="Artisans, commerçants" @selected($adherant->fonction == 'Artisans, commerçants' ? true : false)>M</option>
-                <option value="Autres" @selected($adherant->fonction == 'Autres' ? true : false)>F</option>
+                <option value="Operateur Economique" @selected($diaspora->fonction == 'Operateur Economique' ? true : false)>Operateur Economique</option>
+                <option value="Fonctionnaire d'état" @selected($diaspora->fonction == "Fonctionnaire d'état" ? true : false)>Fonctionnaire d'état</option>
+                <option value="Salariés secteur privé" @selected($diaspora->fonction == 'Salariés secteur privé' ? true : false)>Salariés secteur privé</option>
+                <option value="Elus" @selected($diaspora->fonction == 'Elus' ? true : false)>Elus</option>
+                <option value="Artisans, commerçants" @selected($diaspora->fonction == 'Artisans, commerçants' ? true : false)>Artisans, commerçants</option>
+                <option value="Autres" @selected($diaspora->fonction == 'Autres' ? true : false)>Autres</option>
             </select>
             </div>
-            @error('sexe')
+            @error('fonction')
             <div class="d-block text-danger">{{$message}}</div>
             @enderror
         </div>
@@ -181,7 +182,7 @@
     <div class="form-group">
         <div class="col-md-6 offset-md-3">
             <button type='submit' class="btn btn-primary">Soumettre</button>
-            <button type='reset' class="btn btn-success">Annuler</button>
+
         </div>
     </div>
     </div>

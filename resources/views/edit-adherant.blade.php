@@ -110,7 +110,7 @@
                 <option value="Salariés secteur privé" @selected($adherant->fonction == 'Salariés secteur privé' ? true : false)>Salariés secteur privé</option>
                 <option value="Elus" @selected($adherant->fonction == 'Elus' ? true : false)>Elus</option>
                 <option value="Artisans, commerçants" @selected($adherant->fonction == 'Artisans, commerçants' ? true : false)>Artisans, commerçants</option>
-                <option value="Autres" @selected($adherant->fonction == 'Autres' ? true : false)>F</option>
+                <option value="Autres" @selected($adherant->fonction == 'Autres' ? true : false)>Autres</option>
             </select>
             </div>
             @error('fonction')
@@ -149,8 +149,8 @@
             <div class="col-md-6 col-sm-6">
             <select id="choix" value="{{$adherant->statut}}" name="statut" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisir</option>
-                <option value="Au Chômage" @selected($adherant->statut == 'Au Chômage' ? true : false)>Au Chômage</option>
-                <option value="En Activité" @selected($adherant->statut == 'En Activité' ? true : false)>En Activité</option>
+                <option value="Au chômage" @selected($adherant->statut == 'Au chômage' ? true : false)>Au Chômage</option>
+                <option value="En activité" @selected($adherant->statut == 'En activité' ? true : false)>En Activité</option>
                 
             </select>
         </div>
@@ -302,7 +302,7 @@
     <div class="form-group">
         <div class="col-md-6 offset-md-3">
             <button type='submit' class="btn btn-primary">Soumettre</button>
-            <button type='reset' class="btn btn-success">Annuler</button>
+
         </div>
     </div>
     </div>

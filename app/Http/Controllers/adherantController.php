@@ -76,8 +76,10 @@ class adherantController extends Controller
                              ->where('type', 'Adhérent')
                              ->get();
         } elseif ($user->type === 'Administrateur') {
-            // Si l'utilisateur est un administrateur, récupérez tous les adhérents
-            $adherants = User::where('type', 'Adhérent')->get();
+            // Si l'utilisateur est un administrateur, récupérez tous les adhérents et les coordinateurs
+            $adherants = User::where('type', 'Adhérent')
+            ->orWhere('type', 'Coordonnateur')
+            ->get();
         }
     
         // Générez le contenu HTML du tableau
@@ -183,13 +185,13 @@ class adherantController extends Controller
             'type' => 'required|max:255',
             'email' => 'nullable|email|unique:users,email',
             'password' => 'nullable|min:8',
-            //'ravip' => 'required|max:255',
+            'ravip' => 'nullable|max:255',
             'profession' => 'required|max:255',
             'statut' =>    'required|max:255',
             'fonction' =>    'required|max:255',
-            //'npi' => 'required|max:255',
-            //'photo' => 'required|mimes:jpg,png,jpeg',
-            //'titre_id' => 'required|max:255',
+            'npi' => 'nullable|max:255',
+            'photo' => 'nullable|mimes:jpg,png,jpeg',
+            'titre_id' => 'nullable|max:255',
             'commune_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
             'departement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
             'arrondissement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
@@ -207,7 +209,7 @@ class adherantController extends Controller
         }
 
         }
-        
+        $path_photo_convert_to_table = null; 
         if ($request->hasFile('photo')) {
             // Valider et stocker la photo
             $path_photo = $request->file('photo')->store('public/photos');
@@ -256,7 +258,8 @@ class adherantController extends Controller
             'ravip' => $request->ravip,
             'profession' => $request->profession,
             'npi' => $request->npi,
-            'photo' => $request->has('photo') ? $path_photo_convert_to_table[2] : null,
+            // 'photo' => $request->has('photo') ? $path_photo_convert_to_table[2] : null,
+            'photo' => $path_photo_convert_to_table ? $path_photo_convert_to_table[2] : null,
             'statut' => $request->statut,
             'fonction' => $request->fonction,
             'active' => false,
@@ -408,6 +411,6 @@ class adherantController extends Controller
         $adherant = User::findOrFail($id);
         $adherant->delete();
 
-        return redirect()->back()->with('success', 'Adhérant ' . $adherant->nom . ' ' . $adherant->prenom . ' a été supprimé avec succès.');
+        return redirect()->back()->with('success', $adherant->type . ' '. $adherant->nom . ' ' . $adherant->prenom . ' a été supprimé avec succès.');
     }
 }

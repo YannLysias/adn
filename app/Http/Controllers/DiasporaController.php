@@ -8,6 +8,7 @@ use App\Models\User;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Stmt\Return_;
 
 class DiasporaController extends Controller
@@ -79,15 +80,20 @@ class DiasporaController extends Controller
             'telephone' => 'required|unique:users,telephone|max:255',
             'fonction' => 'required|max:255',
             'email' => 'nullable|email|unique:users,email',
-            //'email' => 'email|unique:users,email|max:255',
-            //'ravip' => 'required|max:255',
+            'ravip' => 'nullable|max:255',
             'profession' => 'required|max:255',
-            //'npi' => 'required|max:255',
-            //'photo' => 'mimes:jpg,png,jpeg',
-            //'pays' => 'required|max:255',
+            'npi' => 'nullable|max:255',
+            'photo' => 'nullable|mimes:jpg,png,jpeg',
+            'pays' => 'nullable|max:255',
+            
                 
 
         ]);
+
+        if ($request->has('photo')) {
+            $path_photo = Storage::putFile('public/photos', $request->photo);
+            $path_photo_convert_to_table = explode('/', $path_photo);
+        }
 
         $admin = User::create([
             'nom' => $request->nom,
@@ -105,7 +111,7 @@ class DiasporaController extends Controller
             'pays' => $request->pays,
             'npi' => $request->npi,
             'active' => false,
-            'photo' => 'Null',
+            'photo' => null,
 
 
         ]);
@@ -193,6 +199,6 @@ class DiasporaController extends Controller
         $diaspora = User::findOrFail($id);
         $diaspora->delete();
 
-        return redirect()->back()->with('success', 'Adhérant ' . $diaspora->nom . ' ' . $diaspora->prenom . ' a été supprimé avec succès.');
+        return redirect()->back()->with('success', 'Diaspora ' . $diaspora->nom . ' ' . $diaspora->prenom . ' a été supprimé avec succès.');
     }
 }

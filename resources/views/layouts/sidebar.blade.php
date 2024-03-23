@@ -28,7 +28,7 @@
 
             @if ( Auth::user()->type == "Administrateur" )
 
-              <li><a href="/adherant"><i class="fa fa-user"></i>Adhérent/Coordonnateurs</a>
+              <li><a href="/adherant"><i class="fa fa-user"></i>Adhérent/ Coordonnateurs</a>
               
               <li><a href="/titre"><i class="fa fa-certificate"></i> Titres</a></li>
               <li><a href="/diaspora"><i class="fa fa-globe"></i> Diasporas</a></li>
@@ -38,11 +38,7 @@
 
             @if ( Auth::user()->type == "Coordonnateur")
 
-            <li><a href="/adherant"><i class="fa fa-user"></i> Adhérants</a></li>
-            <li><a href="/titre"><i class="fa fa-certificate"></i> Titres</a></li>
-            <li><a href="/diaspora"><i class="fa fa-globe"></i> Diasporas</a></li>
-                          {{--
-            <li><a href="/commentaire"><i class="fa fa-table"></i> Commentaire </a> --}}
+            <li><a href="/adherant"><i class="fa fa-user"></i> Adhérents</a></li>
 
             </li>
 

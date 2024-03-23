@@ -62,7 +62,12 @@
                     <div class="col-xl-4">
                       <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                          <img src="/storage/photos/{{Auth::user()->photo}}" style="width: 80px; height: 80px;" alt="Profile" class="rounded-circle profile-picture">
+                          @if($diaspora->photo)
+                          <img src="/storage/photos/{{ $diaspora->photo }}" style="width: 80px; height: 80px;" alt="Profile" class="rounded-circle profile-picture">
+                            @else
+                          <!-- Afficher une image par défaut ou un avatar -->
+                          <img src="/img/images.png" style="width: 80px; height: 80px;" alt="Default Avatar" class="rounded-circle profile-picture">
+                            @endif
                           <h2>{{ $diaspora->nom }} {{ $diaspora->prenom }}</h2>
                           <h3>{{ $diaspora->type }}</h3>
                         </div>
