@@ -92,11 +92,11 @@
                                                                     <th>N°</th>
                                                                     <th>Nom</th>
                                                                     <th>Prénom</th>
+                                                                    <th>sexe</th>
                                                                     <th>Téléphone</th>
                                                                     <th>Profession</th>
-                                                                    <th>Statut</th>
-                                                                    <th>type</th>
-                                                                   
+                                                                    <th>pays</th>
+                                                                    <th>type</th> 
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="listAdherant">
@@ -105,15 +105,12 @@
                                                                     <td>{{ $index + 1 }}</td>
                                                                     <td>{{ $adherant->nom }}</td>
                                                                     <td>{{ $adherant->prenom }}</td>
+                                                                    <td>{{ $adherant->sexe }}</td>
                                                                     <td>{{ $adherant->telephone }}</td>
                                                                     <td>{{ $adherant->profession }}</td>
-                                                                    <td>{{ $adherant->statut }}</td>
-                                                                    <td>{{ $adherant->type }}</td>
+                                                                    <td>{{ $adherant->pays }}</td>
+                                                                    <td>{{ $adherant->categorie }}</td>
                                                                     
-
-                                                                    @if(Auth::user()->categorie === 'Diaspora')
-                                                                    <td>{{ $adherant->pays }}</td>   
-                                                                    @endif
                                                                 </tr>
                                                                 @endforeach
                                                             </tbody>

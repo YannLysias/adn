@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/img/icon.png">
+    <link rel="icon" href="/assets/img/icon.png">
 
     <title>ADN-BENIN</title>
 
@@ -170,7 +170,9 @@
                 <option value="Fonctionnaire d'état" @selected($diaspora->fonction == "Fonctionnaire d'état" ? true : false)>Fonctionnaire d'état</option>
                 <option value="Salariés secteur privé" @selected($diaspora->fonction == 'Salariés secteur privé' ? true : false)>Salariés secteur privé</option>
                 <option value="Elus" @selected($diaspora->fonction == 'Elus' ? true : false)>Elus</option>
-                <option value="Artisans, commerçants" @selected($diaspora->fonction == 'Artisans, commerçants' ? true : false)>Artisans, commerçants</option>
+                <option value="Artisans" @selected($diaspora->fonction == 'Artisans' ? true : false)>Artisans</option>
+                <option value="commerçants" @selected($diaspora->fonction == 'commerçants' ? true : false)>Commerçants</option>
+                <option value="Etudiant(e)" @selected($diaspora->fonction == 'Etudiant(e)' ? true : false)>Etudiant(e)</option>
                 <option value="Autres" @selected($diaspora->fonction == 'Autres' ? true : false)>Autres</option>
             </select>
             </div>

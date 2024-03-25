@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/img/icon.png">
+    <link rel="icon" href="/assets/img/icon.png">
 
     <title>ADN-BENIN</title>
 
@@ -67,12 +67,17 @@
                     <div class="col-xl-4">
                       <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                          @if($user->photo)
-                          <img src="/storage/photos/{{ $user->photo }}" style="width: 80px; height: 80px;" alt="Profile" class="rounded-circle profile-picture">
-                            @else
-                          <!-- Afficher une image par défaut ou un avatar -->
-                          <img src="/img/images.png" style="width: 80px; height: 80px;" alt="Default Avatar" class="rounded-circle profile-picture">
-                            @endif
+                          @if ($user->photo)
+                              <img src="/storage/photos/{{ $user->photo }}" style="width: 80px; height: 80px;" alt="Profile" class="rounded-circle profile-picture">
+                          @else
+                              @if ($user->sexe === 'Feminin')
+                                  <!-- Afficher une image spécifique pour les utilisateurs de sexe féminin -->
+                                  <img src="/img/fille.jpg" style="width: 80px; height: 80px;" alt="Femme Avatar" class="rounded-circle profile-picture">
+                              @else
+                                  <!-- Afficher une image par défaut ou un avatar -->
+                                  <img src="/img/images.png" style="width: 80px; height: 80px;" alt="Homme Avatar" class="rounded-circle profile-picture">
+                              @endif
+                          @endif
                           <h2>{{ $user->nom }} {{ $user->prenom }}</h2>
                           <h3>{{ $user->type }}</h3>
                         </div>
@@ -125,6 +130,14 @@
                                 <div class="col-lg-9 col-md-8">{{ $user->fonction }}</div>
                               </div>
                               
+                              <div class="row">
+                                <div class="col-lg-3 col-md-4 label">NPI</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->npi }}</div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-3 col-md-4 label">RAVIP</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->ravip }}</div>
+                              </div>
                               <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Statut</div>
                                 <div class="col-lg-9 col-md-8">{{ $user->statut }}</div>

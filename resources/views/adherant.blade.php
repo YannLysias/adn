@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/img/icon.png">
+    <link rel="icon" href="/assets/img/icon.png">
 
     <title>ADN Bénin </title>
 
@@ -110,7 +110,7 @@
                         class="form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choisissez un departement</option>
                         @foreach ($departements as $departement)
-                        <option value="{{$departement ->id}}">{{$departement->libelle}}</option>
+                        <option value="{{$departement->id}}">{{$departement->libelle}}</option>
                         @endforeach
                       </select>
 
@@ -119,7 +119,7 @@
                         form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choisissez une commune</option>
                         @foreach ($communes as $commune)
-                        <option value="{{$commune ->id}}">{{$commune->libelle}}</option>
+                        <option value="{{$commune->id}}">{{$commune->libelle}}</option>
                         @endforeach
                       </select>
                       <select id="arrondissement_ID" class="form-select"
@@ -137,7 +137,7 @@
                         class="form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choisissez un quartier</option>
                         @foreach ($quartiers as $quartier)
-                        <option value="{{$quartier ->id}}">{{$quartier->libelle}}</option>
+                        <option value="{{$quartier->id}}">{{$quartier->libelle}}</option>
                         @endforeach
 
                       </select>
@@ -272,6 +272,18 @@
                   loadOptions(urlSelect, $('#quartier_ID'))
 
                     var url = "/adherants/filter/?arrondissement_id=" + arrondissementId;
+                    loadAdherants(url, $('#listAdherant'), index);
+                }
+            });
+
+            $('#quartier_ID').change(function() {
+                var quartierId = $(this).val();
+                if (quartierId) {
+                  var urlSelect = "{{ route('get-quartiers', ':quartierId') }}";
+                  urlSelect = urlSelect.replace(':quartierId', quartierId);
+                  // loadOptions(urlSelect, $('#quartier_ID'))
+
+                    var url = "/adherants/filter/?quartier_id=" + quartierId;
                     loadAdherants(url, $('#listAdherant'), index);
                 }
             });

@@ -14,6 +14,7 @@ use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
@@ -192,10 +193,10 @@ class adherantController extends Controller
             'npi' => 'nullable|max:255',
             'photo' => 'nullable|mimes:jpg,png,jpeg',
             'titre_id' => 'nullable|max:255',
-            'commune_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
-            'departement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
-            'arrondissement_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
-            'quartier_id' => ($request->statut == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'commune_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'departement_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'arrondissement_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
+            'quartier_id' => ($request->categorie == 'Diaspora') ? 'nullable' : 'required|max:255',
 
 
         ]);    
@@ -338,6 +339,7 @@ class adherantController extends Controller
             'password' => 'nullable|min:8',
             //'ravip' => 'required|max:255',
             'profession' => 'required|max:255',
+            'fonction' => 'required|max:255',
             'statut' =>    'required|max:255',
             //'npi' => 'required|max:255',
             'photo' => 'nullable|mimes:jpg,png,jpeg',
@@ -375,32 +377,48 @@ class adherantController extends Controller
         }
 
         
-        
         $adherant->nom = $request->nom;
         $adherant->prenom = $request->prenom;
-        
         $adherant->sexe = $request->sexe;
         $adherant->telephone = $request->telephone;
         $adherant->type = $request->type;
-       
         $adherant->email = $request->email;
-        
         $adherant->password = $request->password;
         $adherant->ravip = $request->ravip;
         $adherant->profession = $request->profession;
         $adherant->npi = $request->npi;
         $adherant->statut = $request->statut;
         $adherant->titre_id = $titre ? $titre->id : null;
+        $adherant->photo = $request->photo ? $request->photo : null;
+        $adherant->photo = $request->photo;
         $adherant->fonction = $request->fonction;
         $adherant->quartier_id = $quartier->id;
         $adherant->departement_id = $departement->id;
         $adherant->arrondissement_id = $arrondissement->id;
         $adherant->commune_id = $commune->id;
+
+        if ($request->type == 'Coordonnateur') {
+            // Générer un nouveau mot de passe
+            $generated_password = Str::random(8); // Générer un mot de passe aléatoire de 8 caractères
+            
+            // Mettre à jour le mot de passe de l'utilisateur
+            $adherant->password = Hash::make($generated_password);
+            $adherant->save();
+    
+            // Envoyer un e-mail à l'utilisateur avec son nouveau mot de passe
+            Notification::send($adherant, new NewCollaborateur([
+                'email' => $adherant->email,
+                'password' => $generated_password,
+            ]));
+        }
         
         $adherant->save();
 
+        
+        
+
         return redirect()->route('adherant.index')->with('success', 'Modifier avec success');
-        dd('kpowds');
+        
     }
 
     /**

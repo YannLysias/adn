@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/img/icon.png">
+    <link rel="icon" href="/assets/img/icon.png">
 
     <title>ADN-BENIN</title>
 
@@ -184,7 +184,9 @@
                                             <option value="Fonctionnaire d'état " {{ old('fonction') == "Fonctionnaire d'état" ? 'selected' : '' }}>Fonctionnaire d'état</option>
                                             <option value="Salariés secteur privé" {{ old('fonction') == 'Salariés secteur privé' ? 'selected' : '' }}>Salariés secteur privé</option>
                                             <option value="Elus" {{ old('sexe') == 'Elus' ? 'selected' : '' }}>Elus</option>
-                                            <option value="Artisans, commerçants" {{ old('fonction') == 'Artisans, commerçants' ? 'selected' : '' }}>Artisans, commerçants</option>
+                                            <option value="Artisans" {{ old('fonction') == 'Artisans' ? 'selected' : '' }}>Artisans</option>
+                                            <option value="commerçants" {{ old('fonction') == 'commerçants' ? 'selected' : '' }}>Commerçants</option>
+                                            <option value="Etudiant(e)" {{ old('fonction') == 'Etudiant(e)' ? 'selected' : '' }}>Etudiant(e)</option>
                                             <option value="Autres" {{ old('fonction') == 'Autres' ? 'selected' : '' }}>Autres</option>
                                         </select>
                                     </div>
@@ -195,9 +197,8 @@
 
                                 <div class="ln_solid">
                                     <div class="form-group">
-                                        <div class="col-md-6 offset-md-6 mt-sm-4"> <!-- Ajoutez la classe mt-sm-3 ici -->
-                                            <button type='submit' class="btn btn-primary">Soumettre</button>
-                                            
+                                        <div class="col-md-6 offset-md-3">
+                                            <button type='submit' class="btn btn-primary mt-3">Soumettre</button>
                                         </div>
                                     </div>
                                 </div>

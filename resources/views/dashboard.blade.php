@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="assets/img/icon.png">
+  <link rel="icon" href="/assets/img/icon.png">
 
   <title>ADN-BENIN </title>
 
@@ -91,7 +91,7 @@
                     <div class="tile-stats">
                       <div class="icon"><i class="fa fa-file"></i></div>
                       <div class="count">{{$totalUser}}</div>
-                      <h4>Total{{$totalUser > 1 ? 's' : ''}} d'enregistrement{{$totalUser > 1 ? 's' : ''}}</h4>
+                      <h4>Total d'enregistrement</h4>
                     </div>
                   </div>
                 </div>

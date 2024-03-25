@@ -103,9 +103,9 @@
                                                                     <th>N°</th>
                                                                     <th>Nom</th>
                                                                     <th>Prénom</th>
+                                                                    <th>Sexe</th>
                                                                     <th>Téléphone</th>
                                                                     <th>Profession</th>
-                                                                    <th>Statut</th>
                                                                     <th>type</th>
                                                                    
                                                                 </tr>
@@ -116,16 +116,10 @@
                                                                     <td>{{ $index + 1 }}</td>
                                                                     <td>{{ $adherant->nom }}</td>
                                                                     <td>{{ $adherant->prenom }}</td>
+                                                                    <td>{{ $adherant->sexe }}</td>
                                                                     <td>{{ $adherant->telephone }}</td>
                                                                     <td>{{ $adherant->profession }}</td>
-                                                                    <td>{{ $adherant->statut }}</td>
-                                                                    <td>{{ $adherant->type }}</td>
-                                                                    
-
-                                                                    @if(Auth::user()->categorie === 'Diaspora')
-                                                                    <td>{{ $adherant->pays }}</td>   
-                                                                    @endif
-                                                                </tr>
+                                                                    <td>{{ $adherant->type }}</td>                                                                </tr>
                                                                 @endforeach
                                                             </tbody>
                                                         </table>

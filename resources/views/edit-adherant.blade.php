@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="assets/img/icon.png">
+    <link rel="icon" href="/assets/img/icon.png">
 
     <title>ADN-BENIN</title>
 
@@ -106,10 +106,12 @@
             <select id="" value="{{$adherant->fonction}}" name="fonction" class="form-control forms-control-lg">
                 <option value="" disabled selected>Choisir</option>
                 <option value="Operateur Economique" @selected($adherant->fonction == 'Operateur Economique' ? true : false)>Operateur Economique</option>
-                <option value="Fonctionnaire d'état" @selected($adherant->fonction == 'Fonctionnaire d état' ? true : false)>Fonctionnaire d état</option>
+                <option value="Fonctionnaire d'état" @selected($adherant->fonction == "Fonctionnaire d'état" ? true : false)>Fonctionnaire d'état</option>
                 <option value="Salariés secteur privé" @selected($adherant->fonction == 'Salariés secteur privé' ? true : false)>Salariés secteur privé</option>
                 <option value="Elus" @selected($adherant->fonction == 'Elus' ? true : false)>Elus</option>
-                <option value="Artisans, commerçants" @selected($adherant->fonction == 'Artisans, commerçants' ? true : false)>Artisans, commerçants</option>
+                <option value="Artisans" @selected($adherant->fonction == 'Artisans' ? true : false)>Artisans</option>
+                <option value="commerçants" @selected($adherant->fonction == 'commerçants' ? true : false)>Commerçants</option>
+                <option value="Etudiant(e)" @selected($adherant->fonction == 'Etudiant(e)' ? true : false)>Etudiant(e)</option>
                 <option value="Autres" @selected($adherant->fonction == 'Autres' ? true : false)>Autres</option>
             </select>
             </div>
@@ -162,11 +164,8 @@
             <label class="col-form-label col-md-3 col-sm-3  label-align">type<span class="required">*</span></label>
             <div class="col-md-6 col-sm-6">
             <select id="choix" value="{{$adherant->type}}" name="type" class="form-control forms-control-lg">
-                @if(Auth::user()->type === 'Administrateur')
                 <option value="Coordonnateur" @selected($adherant->type == 'Coordonnateur' ? true : false)>Coordonnateur</option>
-                @elseif (Auth::user()->type === 'Coordonnateur')
                 <option value="Adhérent" @selected($adherant->type == 'Adhérent' ? true : false)>Adhérent</option>
-                @endif
             </select>
             </div>
             @error('type')

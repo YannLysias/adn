@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <link rel="icon" href="assets/img/icon.png">
+  <link rel="icon" href="/assets/img/icon.png">
 
   <title>ADN-BENIN </title>
   <meta content="" name="description">
@@ -94,7 +94,7 @@
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Téléphone:</h4>
-                <p>+229 63 05 39 05 </p>
+                <p> </p>
               </div>
 
             </div>

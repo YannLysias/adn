@@ -37,20 +37,31 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
     public function authenticate(): void
-    {
-        $this->ensureIsNotRateLimited();
+{
+    $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+    // Tente d'authentifier l'utilisateur
+    if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        RateLimiter::hit($this->throttleKey());
 
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
-        }
-
-        RateLimiter::clear($this->throttleKey());
+        throw ValidationException::withMessages([
+            'email' => trans('auth.failed'),
+        ]);
     }
+
+    // Vérifiez si le mot de passe utilise l'algorithme Bcrypt
+    $admin = Auth::user();
+    $password = $this->input('password');
+
+    if (!password_verify($password, $admin->password)) {
+        Auth::logout(); // Déconnectez l'utilisateur s'il a échoué à authentifier avec succès
+        throw ValidationException::withMessages([
+            'password' => 'This password does not use the Bcrypt algorithm.',
+        ]);
+    }
+}
 
     /**
      * Ensure the login request is not rate limited.
