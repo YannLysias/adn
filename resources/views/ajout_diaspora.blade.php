@@ -142,7 +142,7 @@
                                     <div class="col-md-6 col-sm-6">
                                         <input class="form-control" class='optional' required="required"
                                             name="profession"  type="text"
-                                            value="{{ old('prenom') }}" />
+                                            value="{{ old('profession') }}" />
                                     </div>
                                     @error('profession')
                                     <div class="d-block text-danger">{{$message}}</div>
@@ -265,9 +265,9 @@
                     // Parcourir les résultats de la recherche et afficher les suggestions
                     data.geonames.forEach(function(ville) {
                         var suggestion = document.createElement('div');
-                        suggestion.textContent = ville.name + ' (' + ville.countryName + ')'; // Ajouter le nom du pays
+                        suggestion.textContent =  ville.countryName ; // Ajouter le nom du pays
                         suggestion.addEventListener('click', function() {
-                            document.getElementById('ville').value = ville.name + ' (' + ville.countryName + ')';
+                            document.getElementById('ville').value = pays.countryName;
                             suggestionsContainer.innerHTML = ''; // Effacer la liste déroulante après la sélection
                         });
 

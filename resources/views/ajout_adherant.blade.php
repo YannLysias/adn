@@ -101,7 +101,7 @@
         <div class="field item form-group">
             <label class="col-form-label col-md-3 col-sm-3  label-align">Email</label>
             <div class="col-md-6 col-sm-6">
-                <input class="form-control" name="email" class='email' placeholder="Saisissez votre Email"  type="email"  value="{{ old('email') }}"/>
+                <input class="form-control" name="email" class='email' placeholder="Pas obligatoire"  type="email"  value="{{ old('email') }}"/>
             </div>
             @error('email')
             <div class="d-block text-danger">{{$message}}</div>
@@ -177,7 +177,7 @@
             <label class="col-form-label col-md-3 col-sm-3  label-align">NPI</label>
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" type="number" class='tel'
-                    name="npi" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro NPI" value="{{ old('npi') }}" />
+                    name="npi" data-validate-length-range="8,20" placeholder="Pas obligatoire" value="{{ old('npi') }}" />
             </div>
             @error('npi')
             <div class="d-block text-danger">{{$message}}</div>
@@ -187,7 +187,7 @@
             <label class="col-form-label col-md-3 col-sm-3  label-align">RAVIP</label>
             <div class="col-md-6 col-sm-6">
                 <input class="form-control" type="number" class='tel'
-                    name="ravip" data-validate-length-range="8,20" placeholder="Saisissez votre Numéro RAVIP" value="{{ old('ravip') }}" />
+                    name="ravip" data-validate-length-range="8,20" placeholder="Pas obligatoire" value="{{ old('ravip') }}" />
             </div>
             @error('ravip')
             <div class="d-block text-danger">{{$message}}</div>

@@ -104,6 +104,7 @@
                           <th>Prénom(s)</th>
                           <th>Sexe</th>
                           <th>Téléphone</th>
+                          <th>Profession</th>
                           <th>statut</th>
                           <th>Pays</th>
                           <th>Manipulation</th>
@@ -119,6 +120,7 @@
                             <td>{{$diasporaUser->prenom}}</td>
                             <td>{{$diasporaUser->sexe}}</td>
                             <td>{{$diasporaUser->telephone}}</td>
+                            <td>{{$diasporaUser->profession}}</td>
                             <td>{{$diasporaUser->statut}}</td>
                             <td>{{$diasporaUser->pays}}</td>
                             <td>

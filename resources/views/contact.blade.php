@@ -122,7 +122,7 @@
               <div class="form-group mt-3">
 
                 <select id="choix" value="{{ old('subjection') }}" class="form-control" name="subjection" required>
-                  <option value="">Objet</option>
+                  <option value="" disabled selected>Choisissez l'objet</option>
                   <option value="Masculin">Partenariat</option>
                   <option value="Feminin">Suggestion</option>
                   <option value="Masculin">Renseigement</option>

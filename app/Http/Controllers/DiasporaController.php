@@ -36,7 +36,9 @@ class DiasporaController extends Controller
              $dompdf = new Dompdf($options);
              $dompdf->setBasePath(public_path());
              // Récupérez les données des utilisateurs
-             $adherants = User::where('categorie', 'Diaspora')->get();
+             $adherants = User::where('categorie', 'Diaspora')
+                 ->orderBy('nom') // Tri par ordre alphabétique du nom
+                 ->get();
  
              // Générez le contenu HTML du tableau
              $html = view('pdfdiaspo', compact('adherants'))->render();

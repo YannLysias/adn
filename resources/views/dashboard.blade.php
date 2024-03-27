@@ -97,7 +97,7 @@
                 </div>
               </div>
             </div>
-            <section id="features" class="features my-5">
+            <section id="features" class="features my-3">
               <h2 style="text-align: center; padding: 20px; font-weight: bold;">Les adhérents par département</h2>
               <div class="container" data-aos="fade-up">
                 <div class="row" data-aos="zoom-in" data-aos-delay="100">
@@ -127,14 +127,12 @@
       
 
       <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          
-            &copy; 2024 Action pour le Développement National <strong></strong>
-          
+      <footer class="container-fluid">
+        <div class="row">
+          <div class="col-12 text-center">
+            &copy; 2024 Action pour le Développement National
+          </div>
         </div>
-       
-        <div class="clearfix"></div>
       </footer>
       <!-- /footer content -->
     </div>

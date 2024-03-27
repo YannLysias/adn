@@ -75,12 +75,14 @@ class adherantController extends Controller
             // Si l'utilisateur est un coordonnateur, récupérez les adhérents de son quartier
             $adherants = User::where('quartier_id', $user->quartier_id)
                              ->where('type', 'Adhérent')
+                             ->orderBy('nom') // Tri par ordre alphabétique du nom
                              ->get();
         } elseif ($user->type === 'Administrateur') {
             // Si l'utilisateur est un administrateur, récupérez tous les adhérents et les coordinateurs
             $adherants = User::where('type', 'Adhérent')
-            ->orWhere('type', 'Coordonnateur')
-            ->get();
+                             ->orWhere('type', 'Coordonnateur')
+                             ->orderBy('nom') // Tri par ordre alphabétique du nom
+                             ->get();
         }
     
         // Générez le contenu HTML du tableau
