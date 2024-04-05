@@ -43,10 +43,11 @@ class TitreController extends Controller
             //'user_id' => $request->user_id,
         ]);
     
-        
-        $users = User::where('titre_id', $titre->id)->get();
+        return redirect('titre');
+        // $users = User::where('titre_id', $titre->id)->get();
     
-        return view('liste_utilisateurs_par_titre', ['users' => $users]);
+        // return view('titre', ['users' => $users]);
+
     }
 
     /**
