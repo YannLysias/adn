@@ -96,9 +96,9 @@ class TitreController extends Controller
      */
     public function destroy(string $id)
     {
-        $adherant = Titre::findOrFail($id);
-        $adherant->delete();
+        $titre = Titre::findOrFail($id);
+        $titre->delete();
 
-        return redirect()->back()->with('success', 'Titre ' . $adherant->nom . ' ' . $adherant->prenom . ' a été supprimé avec succès.');
+        return redirect()->back()->with('success', 'Titre a été supprimé avec succès.');
     }
 }

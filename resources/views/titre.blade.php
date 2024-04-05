@@ -116,7 +116,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
-                                        
+                              </form>          
                               <a href="/titre/{{$titre->id}}/edit" class="btn btn-success"><i class="fa fa-edit"></i></a>
                           </td>
                           </tr>
